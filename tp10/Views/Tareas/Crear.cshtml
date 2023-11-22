@@ -1,0 +1,14 @@
+@using tp10
+@model Tarea
+
+<h2>Crear Tarea</h2>
+
+<form asp-action="Crear" method="post">
+    <div class="form-group">
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+    <!-- Agregar campos adicionales según tus necesidades -->
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
