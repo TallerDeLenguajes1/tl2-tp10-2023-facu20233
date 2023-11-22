@@ -17,7 +17,7 @@ public class TareaController : Controller
     // Acción para listar tareas
     public IActionResult Index()
     {
-        var tareas = tareaRepository.;
+        var tareas = tareaRepository.GetAll();
         return View(tareas);
     }
 

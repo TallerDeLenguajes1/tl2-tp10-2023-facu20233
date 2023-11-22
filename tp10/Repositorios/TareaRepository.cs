@@ -72,6 +72,40 @@ namespace tp10.Repositorios{
 
             return (tarea);
         }
+
+        // --
+        public List<Tarea> GetAll()
+        {
+            var queryString = "SELECT * FROM Tarea";
+
+            var tareas = new List<Tarea>();
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(queryString, connection);
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var tarea = new Tarea
+                        {
+                            Id = Convert.ToInt32(reader["id"]),
+                            IdTablero = Convert.ToInt32(reader["id_tablero"]),
+                            Nombre = reader["nombre"].ToString(),
+                            Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]),
+                            Descripcion = reader["descripcion"].ToString(),
+                            Color = reader["color"].ToString(),
+                            IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"])
+                        };
+                        tareas.Add(tarea);
+                    }
+                }
+                connection.Close();
+            }
+
+            return tareas;
+        }
+
         public List<Tarea> GetByTablero(int idTablero){
             var queryString = "SELECT * FROM Tarea WHERE id_tablero = @idTablero";
 
