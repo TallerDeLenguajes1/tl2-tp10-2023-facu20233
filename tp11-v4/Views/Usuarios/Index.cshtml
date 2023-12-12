@@ -1,0 +1,50 @@
+@* Index.cshtml *@
+@using tp10.Models
+@model List<Usuario>
+@* @model tp10.ViewModels.ListarUsuariosViewModel *@
+    
+@*  
+@{
+    // Obtener el rol del usuario actual, puedes usar el servicio de autenticación de ASP.NET Core
+    var rol = ObtenerRolUsuarioActual();
+}
+
+@if (rol == "admin")
+{
+    <h1>Listado de Usuarios</h1>
+    <!-- Lógica para mostrar el listado de usuarios -->
+}
+else
+{
+    <h1>Error de Acceso</h1>
+    <p>No tienes permisos para ver esta página.</p>
+}
+*@
+
+<h2>Listado de Usuarios</h2>
+<a asp-action="Crear" asp-route-id="">Crear Nuevo usuario</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre de Usuario</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @* @foreach (var usuario in Model.Usuarios) *@
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <td>@usuario.Id</td>
+                <td>@usuario.NombreDeUsuario</td>
+                <td>@usuario.Rol</td>
+                <td>
+                    <a asp-action="Modificar" asp-route-id="@usuario.Id">Modificar</a>
+                    <a asp-action="Eliminar" asp-route-id="@usuario.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

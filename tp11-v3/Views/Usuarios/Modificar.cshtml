@@ -1,0 +1,24 @@
+@using tp10.Models
+@model Usuario
+
+<h2>Modificar Usuario</h2>
+
+<form asp-action="Modificar" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="NombreDeUsuario"></label>
+        <input asp-for="NombreDeUsuario" class="form-control" />
+        <span asp-validation-for="NombreDeUsuario" class="text-danger"></span>
+    </div>
+    
+    @* agregar modificar rol *@
+    <div class="form-group">
+        <label asp-for="Rol"></label>
+        <select asp-for="Rol" asp-items="Html.GetEnumSelectList<Rol>()" class="form-control">
+            <option value="">Seleccione un Rol</option>
+        </select>
+        <span asp-validation-for="Rol" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+</form>

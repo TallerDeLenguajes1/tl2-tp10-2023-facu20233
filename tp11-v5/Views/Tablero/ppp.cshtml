@@ -1,0 +1,35 @@
+@using tp10.Models
+@model List<Tarea>
+
+<h2>Tareas Asociadas al Tablero</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Color</th>
+            <th>Estado</th>
+            <th>Usuario Asignado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tarea in Model)
+        {
+            <tr>
+                <td>@tarea.Id</td>
+                <td>@tarea.Nombre</td>
+                <td>@tarea.Descripcion</td>
+                <td>@tarea.Color</td>
+                <td>@tarea.Estado</td>
+                <td>@tarea.IdUsuarioAsignado</td>
+                <td>
+                    <a asp-action="Modificar" asp-route-id="@tarea.Id">Modificar</a> |
+                    <a asp-action="Eliminar" asp-route-id="@tarea.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

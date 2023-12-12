@@ -1,0 +1,30 @@
+@using tp10
+@using tp10.Models
+@model List<tp10.Models.Tablero>
+
+<h2>Listado de Tableros</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tablero in Model)
+        {
+            <tr>
+                <td>@tablero.Id</td>
+                <td>@tablero.Nombre</td>
+                <td>@tablero.Descripcion</td>
+                <td>
+                    <a asp-action="Modificar" asp-route-id="@tablero.Id">Modificar</a> |
+                    <a asp-action="Eliminar" asp-route-id="@tablero.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
