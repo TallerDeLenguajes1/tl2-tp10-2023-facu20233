@@ -1,4 +1,8 @@
-namespace tp10;
+// Tarea.cs
+using tp10.ViewModels;
+
+namespace tp10.Models;
+
 
 public enum EstadoTarea{
     Ideas,
@@ -7,6 +11,7 @@ public enum EstadoTarea{
     Review,
     Done
 }
+
 public class Tarea{
     private int id;
     private int idTablero;
@@ -23,4 +28,27 @@ public class Tarea{
     public string Color { get => color; set => color = value; }
     public EstadoTarea Estado { get => estado; set => estado = value; }
     public int IdUsuarioAsignado { get => idUsuarioAsignado; set => idUsuarioAsignado = value; }
+
+    public Tarea()
+    {
+    }
+
+    public Tarea(CrearTareaViewModel creTareaVM)
+    {
+        idUsuarioAsignado = creTareaVM.IdTablero;
+        Nombre = creTareaVM.Nombre;
+        Estado = creTareaVM.Estado;
+        Descripcion = creTareaVM.Descripcion;
+        Color = creTareaVM.Color;
+    }
+
+    public Tarea(ModificarTareaViewModel upTareaVM)
+    {
+        idTablero = upTareaVM.IdTablero;
+        Nombre = upTareaVM.Nombre;    
+        Estado = upTareaVM.Estado;
+        Descripcion = upTareaVM.Descripcion;
+        Color = upTareaVM.Color;
+    }
+
 }

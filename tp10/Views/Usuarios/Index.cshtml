@@ -1,30 +1,30 @@
-@using tp10
-@model List<Usuario>
+@* Index.cshtml *@
+@model tp10.ViewModels.ListarUsuariosViewModel
 
 <h2>Listado de Usuarios</h2>
+<a asp-action="Crear" asp-route-id="">Crear Nuevo usuario</a>
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th><z
+            <th>ID</th>
             <th>Nombre de Usuario</th>
+            <th>Rol</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var usuario in Model)
+        @* @foreach (var usuario in Model.Usuarios) *@
+        @foreach (var usuario in Model.ListaUsuarios)
         {
             <tr>
                 <td>@usuario.Id</td>
                 <td>@usuario.NombreDeUsuario</td>
+                <td>@usuario.Rol</td>
                 <td>
-                    <a asp-action="Modificar" asp-route-id="@usuario.Id">Modificar</a> 
+                    <a asp-action="Modificar" asp-route-id="@usuario.Id">Modificar</a>
                     <a asp-action="Eliminar" asp-route-id="@usuario.Id">Eliminar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
-
-
-

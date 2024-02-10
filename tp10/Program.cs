@@ -1,7 +1,25 @@
+using tp10.Repositorios;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDistributedMemoryCache();
+
+var CadenaDeConexion = builder.Configuration.GetConnectionString("SqliteConexion")!.ToString();
+builder.Services.AddSingleton<string>(CadenaDeConexion);
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(300);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+
+// Register repositories ***
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<ITableroRepository, TableroRepository>();
 
 var app = builder.Build();
 
@@ -17,7 +35,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(

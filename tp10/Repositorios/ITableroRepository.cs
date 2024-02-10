@@ -1,3 +1,5 @@
+using tp10.Models;
+
 namespace tp10.Repositorios{
     public interface ITableroRepository{
         public void Create(Tablero tablero);

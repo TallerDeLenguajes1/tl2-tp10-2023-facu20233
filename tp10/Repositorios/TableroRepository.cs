@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using tp10.Models;
 // dotnet add package System.Data.SQLite
-namespace tp10.Repositorios{
-    public class TableroRepository : ITableroRepository{
-        private string cadenaConexion = "Data Source=db/kanban.db;Cache=Shared";
-        public void Create(Tablero tablero){
+namespace tp10.Repositorios
+{
+    public class TableroRepository : ITableroRepository
+    {
+        private readonly string cadenaConexion;
+        public TableroRepository(string CadenaDeConexion){
+            this.cadenaConexion = CadenaDeConexion;
+        }
+
+        public void Create(Tablero tablero)
+        {
             var query = $"INSERT INTO Tablero (id_usuario_propietario, nombre, descripcion) VALUES (@idUser, @nombre, @descripcion)";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
@@ -21,13 +29,15 @@ namespace tp10.Repositorios{
 
                 command.ExecuteNonQuery();
 
-                connection.Close();   
+                connection.Close();
             }
         }
-        public void Update(int id, Tablero tablero){
+        public void Update(int id, Tablero tablero)
+        {
             var query = $"UPDATE Tablero SET id_usuario_propietario = @idUser, nombre = @nombre, descripcion = @descripcion WHERE id = @id";
 
-            using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
                 connection.Open();
                 var command = new SQLiteCommand(query, connection);
                 command.Parameters.Add(new SQLiteParameter("@idUser", tablero.IdUsuarioPropietario));
@@ -38,22 +48,25 @@ namespace tp10.Repositorios{
                 connection.Close();
             }
         }
-        public List<Tablero> GetAll(){
-             var queryString = @"SELECT * FROM Tablero;";
+        public List<Tablero> GetAll()
+        {
+            var queryString = @"SELECT * FROM Tablero;";
             List<Tablero> tableros = new List<Tablero>();
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(queryString, connection);
-                using(SQLiteDataReader reader = command.ExecuteReader())
+                using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         var tablero = new Tablero();
+
                         tablero.Id = Convert.ToInt32(reader["id"]);
                         tablero.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
                         tablero.Nombre = reader["nombre"].ToString();
                         tablero.Descripcion = reader["descripcion"].ToString();
+                        
                         tableros.Add(tablero);
                     }
                 }
@@ -61,7 +74,47 @@ namespace tp10.Repositorios{
             }
             return tableros;
         }
-        public Tablero Get(int id){
+
+        // public List<Tarea> ObtenerTareasAsociadasAlTablero(int idTablero)
+        // {
+        //     var queryString = "SELECT * FROM Tarea WHERE id_tablero = @idTablero";
+
+        //     List<Tarea> tareas = new List<Tarea>();
+
+        //     using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+        //     {
+        //         connection.Open();
+        //         SQLiteCommand command = new SQLiteCommand(queryString, connection);
+        //         command.Parameters.Add(new SQLiteParameter("@idTablero", idTablero));
+
+        //         using (SQLiteDataReader reader = command.ExecuteReader())
+        //         {
+        //             while (reader.Read())
+        //             {
+        //                 var tarea = new Tarea
+        //                 {
+        //                     Id = Convert.ToInt32(reader["id"]),
+        //                     IdTablero = Convert.ToInt32(reader["id_tablero"]),
+        //                     Nombre = reader["nombre"].ToString(),
+        //                     Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]),
+        //                     Descripcion = reader["descripcion"].ToString(),
+        //                     Color = reader["color"].ToString(),
+        //                     IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"])
+        //                 };
+
+        //                 tareas.Add(tarea);
+        //             }
+        //         }
+
+        //         connection.Close();
+        //     }
+
+        //     return tareas;
+        // }
+
+
+        public Tablero Get(int id)
+        {
             var queryString = "SELECT * FROM Tablero WHERE id = @idTablero";
 
             var tablero = new Tablero();
@@ -70,7 +123,7 @@ namespace tp10.Repositorios{
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(queryString, connection);
                 command.Parameters.Add(new SQLiteParameter("@idTablero", id));
-                using(SQLiteDataReader reader = command.ExecuteReader())
+                using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -85,8 +138,10 @@ namespace tp10.Repositorios{
 
             return (tablero);
         }
-        public List<Tablero> GetByUser(int idUsuario){
-            var queryString = "SELECT * FROM Tablero WHERE id_usuario_propietaerio = @idUser";
+
+        public List<Tablero> GetByUser(int idUsuario)
+        {
+            var queryString = "SELECT * FROM Tablero WHERE id_usuario_propietario = @idUser";
 
             var tableros = new List<Tablero>();
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
@@ -94,7 +149,7 @@ namespace tp10.Repositorios{
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(queryString, connection);
                 command.Parameters.Add(new SQLiteParameter("@idUser", idUsuario));
-                using(SQLiteDataReader reader = command.ExecuteReader())
+                using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -111,7 +166,8 @@ namespace tp10.Repositorios{
 
             return (tableros);
         }
-        public void Remove(int id){
+        public void Remove(int id)
+        {
             var queryString = "DELETE FROM Tablero WHERE id = @id";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {

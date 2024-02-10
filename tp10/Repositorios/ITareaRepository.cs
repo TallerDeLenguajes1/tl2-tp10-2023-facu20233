@@ -1,3 +1,5 @@
+using tp10.Models;
+
 namespace tp10.Repositorios{
     public interface ITareaRepository{
         public void Create(int idTablero, Tarea tarea);

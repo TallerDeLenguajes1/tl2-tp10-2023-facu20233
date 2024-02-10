@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using tp10;
+using tp10.Models;
 
 namespace tp10.Controllers;
 
