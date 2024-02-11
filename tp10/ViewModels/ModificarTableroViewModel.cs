@@ -22,23 +22,8 @@ namespace tp10.ViewModels
 
         public ModificarTableroViewModel()
         {
-            // Puedes asignar valores predeterminados aquí si es necesario
+        
         }
-
-        // public ModificarTableroViewModel(int IdTablero, List<Usuario> users)
-        // {
-        //     Id = IdTablero;
-        //     Usuarios = users;
-        // }
-
-        // public ModificarTableroViewModel(Tablero tablero)
-        // {
-        //     Id = tablero.Id;
-        //     Nombre = tablero.Nombre;
-        //     Descripcion = tablero.Descripcion;
-
-        //     // Inicializa otras propiedades según sea necesario
-        // }
 
         public ModificarTableroViewModel(Tablero tablero){
             this.Id = tablero.Id;

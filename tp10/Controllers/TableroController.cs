@@ -58,6 +58,37 @@ public class TableroController : Controller
 
     }
 
+    [HttpGet]
+    public IActionResult UpdateTablero(int id){
+        try
+        {
+            if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+            return View(new ModificarTableroViewModel(_tableroRepository.Get(id)));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+    
+    [HttpPost]
+    public IActionResult UpdateTablero(ModificarTableroViewModel tablero){
+        try
+        {
+            if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+            if(!ModelState.IsValid) return RedirectToAction("Index");
+            
+            _tableroRepository.Update(tablero.Id, new Tablero(tablero));
+            return RedirectToAction("Index");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+
 
     // [HttpGet]
     // // Acción para mostrar la página de creación de tableros
@@ -88,29 +119,6 @@ public class TableroController : Controller
     //     return RedirectToAction("Index"); 
     // }
 
-    // // Acción para mostrar la página de modificación de tableros
-    // [HttpGet]
-    // public IActionResult Modificar(int IdTablero)
-    // {
-    //     if (!manejoController.IsLogged(HttpContext)) return RedirectToAction("Index");
-    //     if (!manejoController.IsAdmin(HttpContext)) return RedirectToAction("Index");
-
-    //     return View(new ModificarTableroViewModel(_tableroRepository.Get(IdTablero)));
-    // }
-
-    // // Acción para procesar la modificación de tableros
-    // [HttpPost]
-    // public IActionResult Modificar(ModificarTableroViewModel tableroVM)
-    // {
-    //     if (!manejoController.IsLogged(HttpContext)) return RedirectToAction("Index");
-    //     if (!manejoController.IsAdmin(HttpContext)) return RedirectToAction("Index");
-    //     if (!ModelState.IsValid) return RedirectToAction("Index");
-
-    //     // var tablero = new Tablero(tableroVM);
-
-    //     _tableroRepository.Update(tableroVM.Id, new Tablero(tableroVM));
-    //     return RedirectToAction("Index");
-    // }
 
     // // Acción para eliminar tableros
     // public IActionResult Eliminar(int id)

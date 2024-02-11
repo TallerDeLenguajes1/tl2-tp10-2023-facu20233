@@ -48,12 +48,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVyb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Tablero/Modificar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVyb1xNb2RpZmljYXIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Tablero/ppp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVyb1xwcHAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Tablero/UpdateTablero.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVyb1xVcGRhdGVUYWJsZXJvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Tarea/Crear.cshtml]
