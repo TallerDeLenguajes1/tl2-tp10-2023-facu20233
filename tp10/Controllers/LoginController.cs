@@ -24,12 +24,12 @@ public class LoginController : Controller
     }
 
 
-    public IActionResult Login(UsuarioViewModel usuario)
+    public IActionResult Login(LoginViewModel  usuario)
     {
         try
         {
             //existe el usuario?
-            var usuarioLogeado = _usuarioRepository.AutenticarUsuario(usuario.NombreDeUsuario, usuario.Contrasenia);
+            var usuarioLogeado = _usuarioRepository.AutenticarUsuario(usuario.nombreDeUsuario, usuario.contrasenia);
 
             // si el usuario no existe devuelvo al index
             if (usuarioLogeado == null)
@@ -41,7 +41,7 @@ public class LoginController : Controller
                 return View("Index", loginVM);
             }
 
-            logearUsuario(usuario);
+            logearUsuario(usuarioLogeado);
 
         }
         catch (Exception ex)
@@ -53,10 +53,10 @@ public class LoginController : Controller
         return RedirectToRoute(new { controller = "Home", action = "Index" });
     }
 
-    private void logearUsuario(UsuarioViewModel user)
+    private void logearUsuario(Usuario user)
     {
         HttpContext.Session.SetString("Usuario", user.NombreDeUsuario);
         HttpContext.Session.SetString("Contrasenia", user.Contrasenia);
-        HttpContext.Session.SetString("NivelAcceso", user.Rol.ToString());
+        HttpContext.Session.SetString("Rol", user.Rol.ToString());
     }
 }

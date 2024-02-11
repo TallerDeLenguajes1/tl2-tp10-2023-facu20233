@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using tp10.Models;
 
 
 namespace tp10.ViewModels
@@ -17,5 +18,7 @@ namespace tp10.ViewModels
         [PasswordPropertyText]
         [Display(Name = "Contraseña")]
         public string? contrasenia {get;set;}
+
+        public Rol Rol { get; set; }
     }
 }

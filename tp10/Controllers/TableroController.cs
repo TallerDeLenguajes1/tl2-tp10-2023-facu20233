@@ -35,11 +35,13 @@ public class TableroController : Controller
 
             if (esAdmin())
             {
+                ViewBag.AdminMessage = "¡Logueado como administrador!";
                 var tableros = _tableroRepository.GetAll();
                 return View(new ListarTablerosViewModel(tableros));
             }
             else
             {
+                ViewBag.AdminMessage = "¡Logueado como operador!";
                 var tableros = _tableroRepository.GetAll();
                 return View(new ListarTablerosViewModel(tableros));
                 // var usuario = _usuarioRepository.GetAll().FirstOrDefault(u => u.NombreDeUsuario == HttpContext.Session.GetString("Usuario") && u.Contrasenia == HttpContext.Session.GetString("Contrasenia"));
@@ -131,7 +133,14 @@ public class TableroController : Controller
 
     private bool esAdmin()
     {
-        return HttpContext.Session.Keys.Any() && HttpContext.Session.GetString("NivelAcceso") == Rol.Administrador.ToString();
+
+        bool sesionIniciada = HttpContext.Session.Keys.Any();
+        string nivelAcceso = HttpContext.Session.GetString("Rol");
+        bool esAdmin = nivelAcceso == Rol.Administrador.ToString();
+        return sesionIniciada && esAdmin;
+
+        // return HttpContext.Session.Keys.Any() && HttpContext.Session.GetString("NivelAcceso") == Rol.Administrador.ToString();
+
     }
 
 }

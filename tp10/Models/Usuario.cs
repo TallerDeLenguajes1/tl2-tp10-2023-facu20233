@@ -1,11 +1,11 @@
 namespace tp10.Models;
 using tp10.ViewModels;
+
 public enum Rol
 {
     Operador = 1,
     Administrador = 2
 }
-
 public class Usuario{
     private int id;
     private string nombreDeUsuario;

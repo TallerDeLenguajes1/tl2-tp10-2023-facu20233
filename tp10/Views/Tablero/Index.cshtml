@@ -1,5 +1,10 @@
 @model tp10.ViewModels.ListarTablerosViewModel
 
+@if (ViewBag.AdminMessage != null)
+{
+    <p>@ViewBag.AdminMessage</p>
+}
+
 <h2>Listado de Tableros</h2>
 
 <a asp-action="Crear" asp-route-id="">Crear Nuevo Tablero</a>
