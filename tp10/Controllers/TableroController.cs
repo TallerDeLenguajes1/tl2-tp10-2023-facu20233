@@ -59,10 +59,11 @@ public class TableroController : Controller
     }
 
     [HttpGet]
-    public IActionResult UpdateTablero(int id){
+    public IActionResult UpdateTablero(int id)
+    {
         try
         {
-            if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             return View(new ModificarTableroViewModel(_tableroRepository.Get(id)));
         }
         catch (Exception ex)
@@ -71,14 +72,15 @@ public class TableroController : Controller
             return RedirectToAction("Error");
         }
     }
-    
+
     [HttpPost]
-    public IActionResult UpdateTablero(ModificarTableroViewModel tablero){
+    public IActionResult UpdateTablero(ModificarTableroViewModel tablero)
+    {
         try
         {
-            if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
-            if(!ModelState.IsValid) return RedirectToAction("Index");
-            
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+            if (!ModelState.IsValid) return RedirectToAction("Index");
+
             _tableroRepository.Update(tablero.Id, new Tablero(tablero));
             return RedirectToAction("Index");
         }
@@ -89,6 +91,23 @@ public class TableroController : Controller
         }
     }
 
+    public IActionResult DeleteTablero(int id)
+    {
+        try
+        {
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+            if (!ModelState.IsValid) return RedirectToAction("Index", id);
+
+            var idTablero = _tableroRepository.Get(id).Id;
+            _tableroRepository.Remove(id);
+            return RedirectToAction("Index", new { id = idTablero });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
 
     // [HttpGet]
     // // Acción para mostrar la página de creación de tableros
@@ -120,14 +139,7 @@ public class TableroController : Controller
     // }
 
 
-    // // Acción para eliminar tableros
-    // public IActionResult Eliminar(int id)
-    // {
-    //     if (!manejoController.IsLogged(HttpContext)) return RedirectToAction("Index");
-    //     if (!manejoController.IsAdmin(HttpContext)) return RedirectToAction("Index");
-    //     _tableroRepository.Remove(id);
-    //     return RedirectToAction("Index");
-    // }
+
 
     public IActionResult Error()
     {
