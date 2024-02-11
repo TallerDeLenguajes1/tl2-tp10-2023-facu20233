@@ -30,7 +30,7 @@ public class TableroController : Controller
     {
         try
         {
-            if (!logueado()) return RedirectToAction("Index");
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             var user = HttpContext.Session.GetString("Usuario");
 
             if (esAdmin())

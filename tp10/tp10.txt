@@ -1,5 +1,7 @@
-modificar 
-eliminar
+
+tareas
+modificar /
+eliminar /
 ---
 login funcionando
 admin() no funciona bien
@@ -8,5 +10,5 @@ listar tableros
 commits inicio correccio de la vista X
 
 
-
+------- consultas ---------
 

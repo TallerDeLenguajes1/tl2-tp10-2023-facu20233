@@ -5,5 +5,10 @@ namespace tp10.ViewModels;
 
 public class ListarTareasViewModel
 {
-    public List<TareaViewModel> Tareas { get; set; }
+    public List<Tarea> ListaTareas { get; set; }
+
+    public ListarTareasViewModel(List<Tarea> listaTareas)
+    {
+        ListaTareas = listaTareas;
+    }
 }

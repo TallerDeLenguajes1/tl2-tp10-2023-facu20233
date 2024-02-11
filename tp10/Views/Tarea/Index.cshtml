@@ -1,5 +1,4 @@
-@using tp10.Models
-@model List<Tarea>
+@model tp10.ViewModels.ListarTareasViewModel
 
 <h2>Listado de Tareas</h2>
 
@@ -15,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var tarea in Model)
+        @foreach (var tarea in Model.ListaTareas)
         {
             <tr>
                 <td>@tarea.Id</td>
