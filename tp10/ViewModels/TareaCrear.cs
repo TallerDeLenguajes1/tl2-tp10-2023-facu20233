@@ -25,9 +25,5 @@ public class CrearTareaViewModel
     public int IdTablero { get; internal set; }
     public Tarea Tarea { get; internal set; }
 
-
-
-    
-
     // Otros campos que puedan ser necesarios para la creación de tareas
 }

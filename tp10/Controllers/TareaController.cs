@@ -40,9 +40,30 @@ public class TareaController : Controller
             _logger.LogError(ex.ToString());
             return RedirectToAction("Error");
         }
-
-
     }
+
+    [HttpGet]
+    public IActionResult UpdateTarea(int id)
+    {
+        if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+        if (!esAdmin()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+
+        var tareaVM = new ModificarTareaViewModel(_tareaRepository.Get(id));
+        return View(tareaVM);
+    }
+
+    [HttpPost]
+    public IActionResult UpdateTarea(ModificarTareaViewModel tarea)
+    {
+        if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+        if (!ModelState.IsValid) return RedirectToAction("Index");
+
+        _tareaRepository.Update(tarea.Id, new Tarea(tarea));
+        return RedirectToAction("Index");
+        // return RedirectToAction("TareasAsociadas", new { idTablero = tarea.IdTablero });
+    }
+
+
 
     // --------- Controles -----------
 
@@ -116,31 +137,10 @@ public class TareaController : Controller
 //     return RedirectToAction("TareasAsociadas", new { idTablero = TareaVM.IdTablero });
 // }
 
-// [HttpGet]
-// // Acción para mostrar la página de modificación de tareas
-// public IActionResult Modificar(int id)
-// {
-//     if (!manejoController.IsLogged(HttpContext)) return RedirectToAction("Index");
-//     if (!manejoController.IsAdmin(HttpContext)) return RedirectToAction("Index");
+    // Acción para eliminar tareas
+    // public IActionResult Eliminar(int id)
+    // {
+    //     tareaRepository.Remove(id);
+    //     return RedirectToAction("Index");
+    // }
 
-//     var tareaVM = new ModificarTareaViewModel(tareaRepository.Get(id));
-//     return View(tareaVM);
-// }
-
-// // Acción para procesar la modificación de tareas
-// [HttpPost]
-// public IActionResult Modificar(ModificarTareaViewModel tareaVM)
-// {
-//     if (!manejoController.IsLogged(HttpContext)) return RedirectToAction("Index");
-//     if (!ModelState.IsValid) return RedirectToAction("Index");
-
-//     tareaRepository.Update(tareaVM.Id, new Tarea(tareaVM));
-//     return RedirectToAction("TareasAsociadas", new { idTablero = tareaVM.IdTablero });
-// }
-
-// // Acción para eliminar tareas
-// public IActionResult Eliminar(int id)
-// {
-//     tareaRepository.Remove(id);
-//     return RedirectToAction("Index");
-// }

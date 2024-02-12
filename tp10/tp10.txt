@@ -1,7 +1,8 @@
-
 tareas
-modificar /
-eliminar /
+    modificar 
+    elimanar 
+    crear 
+
 ---
 login funcionando
 admin() no funciona bien
