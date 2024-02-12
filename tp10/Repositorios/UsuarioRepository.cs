@@ -135,23 +135,23 @@ namespace tp10.Repositorios
         }
 
 
-        // public void Create(Usuario usuario)
-        // {
-        //     var query = @"INSERT INTO Usuario (nombre_de_usuario, contrasenia, rol) VALUES (@nombre, @contrasenia, @rol);";
-        //     using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
-        //     {
+        public void Create(Usuario usuario)
+        {
+            var query = @"INSERT INTO Usuario (nombre_de_usuario, contrasenia, rol) VALUES (@nombre_de_usuario, @contrasenia, @rol);";
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
 
-        //         var command = new SQLiteCommand(query, connection);
-        //         connection.Open();
+                var command = new SQLiteCommand(query, connection);
+                connection.Open();
 
-        //         command.Parameters.Add(new SQLiteParameter("@nombre", usuario.NombreDeUsuario));
-        //         command.Parameters.Add(new SQLiteParameter("@contrasenia", usuario.Contrasenia));
-        //         command.Parameters.Add(new SQLiteParameter("@rol", (int)usuario.Rol));
-        //         command.ExecuteNonQuery();
+                command.Parameters.Add(new SQLiteParameter("@nombre_de_usuario", usuario.NombreDeUsuario));
+                command.Parameters.Add(new SQLiteParameter("@contrasenia", usuario.Contrasenia));
+                command.Parameters.Add(new SQLiteParameter("@rol", (int)usuario.Rol));
+                command.ExecuteNonQuery();
 
-        //         connection.Close();
-        //     }
-        // }
+                connection.Close();
+            }
+        }
 
 
         // public Usuario GetUsuario(string nombreDeUsuario, string contrasenia)

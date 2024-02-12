@@ -99,6 +99,52 @@ public class UsuarioController : Controller
         }
     }
 
+    [HttpGet]
+    public IActionResult CrearUsuario()
+    {
+        try
+        {
+
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+
+            // var mesas = _usuarioRepository.GetAllMesas();
+
+            // var viewModel = new CrearReservaViewModel
+            // {
+            //     MesasDisponibles = mesas
+            // };
+
+            var viewModel = new CrearUsuarioViewModel();
+            return View(viewModel);
+        }
+
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+
+    [HttpPost]
+    public IActionResult CrearUsuario(CrearUsuarioViewModel usuario)
+    {
+        try
+        {
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+            if (!ModelState.IsValid) return RedirectToAction("Index");
+
+
+            _usuarioRepository.Create(new Usuario(usuario));
+            return RedirectToAction("Index");
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+
 
     // --------- Controles -----------
 

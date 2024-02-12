@@ -9,7 +9,7 @@ namespace tp10.Repositorios
         public void Update(int id, Usuario usuario);
         public Usuario Get(int id);
         public void Delete(int id);
-        // public void Create(Usuario usuario);
+        public void Create(Usuario usuario);
         // public void Update(int id, Usuario usuario);
         // public Usuario Get(int id);
         // public void Remove(int id);

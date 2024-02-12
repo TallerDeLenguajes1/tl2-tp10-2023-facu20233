@@ -1,7 +1,7 @@
 usuario
-    listar
-    modificar
-    dele
+    listar /
+    modificar / 
+    dele /
     crar
 
 try cach

@@ -68,12 +68,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFyZWFcVXBkYXRlVGFyZWEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Usuario/crear.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xjcmVhci5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Usuario/Eliminar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFbGltaW5hci5jc2h0bWw=
+[C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Usuario/CrearUsuario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhclVzdWFyaW8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Usuario/Index.cshtml]
