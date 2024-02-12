@@ -1,7 +1,7 @@
 tareas
-    modificar 
-    elimanar 
-    crear 
+    modificar /
+    elimanar /
+    crear / (agregar el constructor?)
 
 ---
 login funcionando
@@ -12,4 +12,4 @@ commits inicio correccio de la vista X
 
 
 ------- consultas ---------
-
++ el constructor en el viewmodel va o no?

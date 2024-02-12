@@ -12,14 +12,14 @@ public class TareaController : Controller
     private readonly ILogger<TareaController> _logger;
 
     private readonly ITareaRepository _tareaRepository;
-    // private readonly ITableroRepository _tableroRepository;
+    private readonly ITableroRepository _tableroRepository;
     // private readonly IUsuarioRepository _usuarioRepository;
 
 
-    public TareaController(ILogger<TareaController> logger, ITareaRepository tareaRepository)
+    public TareaController(ILogger<TareaController> logger, ITareaRepository tareaRepository, ITableroRepository tableroRepository)
     {
         _logger = logger;
-        // _tableroRepository = tableroRepository;
+        _tableroRepository = tableroRepository;
         // _usuarioRepository = usuarioRepository;
         _tareaRepository = tareaRepository;
     }
@@ -71,6 +71,53 @@ public class TareaController : Controller
         var id_reserva = _tareaRepository.Get(id).Id;
         _tareaRepository.Delete(id);
         return RedirectToAction("Index", new { id = id_reserva });
+    }
+
+    [HttpGet]
+    public IActionResult CrearTarea()
+    {
+        try
+        {
+
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+
+            // var tareas = _tareaRepository.GetAllMesas();
+
+            // var viewModel = new CrearReservaViewModel
+            // {
+            //     MesasDisponibles = tareas
+            // };
+
+            var viewModel = new CrearTareaViewModel();
+            return View(viewModel);
+        }
+
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+
+
+    [HttpPost]
+    public IActionResult CrearTarea(CrearTareaViewModel tareaVm, int id_tablero)
+    {
+        try
+        {
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+            if (!ModelState.IsValid) return RedirectToAction("Index");
+
+            var id_Tablero = _tableroRepository.Get(id_tablero).Id;
+            _tareaRepository.Create( id_Tablero ,new Tarea(tareaVm));
+            return RedirectToAction("Index");
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
     }
 
     // --------- Controles -----------

@@ -8,13 +8,13 @@ public class TareaViewModel
     public int Id { get; set; }
 
     [Display(Name = "Nombre de la Tarea")]
-    public string Nombre { get; set; }
+    public string? Nombre { get; set; }
 
     [Display(Name = "Descripción de la Tarea")]
-    public string Descripcion { get; set; }
+    public string? Descripcion { get; set; }
 
     [Display(Name = "Color de la Tarea")]
-    public string Color { get; set; }
+    public string? Color { get; set; }
 
     [Display(Name = "Estado de la Tarea")]
     public EstadoTarea Estado { get; set; }

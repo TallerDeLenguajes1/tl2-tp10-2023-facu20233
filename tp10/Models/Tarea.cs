@@ -4,7 +4,8 @@ using tp10.ViewModels;
 namespace tp10.Models;
 
 
-public enum EstadoTarea{
+public enum EstadoTarea
+{
     Ideas,
     ToDo,
     Doing,
@@ -12,7 +13,8 @@ public enum EstadoTarea{
     Done
 }
 
-public class Tarea{
+public class Tarea
+{
     private int id;
     private int idTablero;
     private string? nombre;
@@ -33,22 +35,23 @@ public class Tarea{
     {
     }
 
+    public Tarea(ModificarTareaViewModel upTareaVM)
+    {
+        idTablero = upTareaVM.IdTablero;
+        Nombre = upTareaVM.Nombre;
+        Estado = upTareaVM.Estado;
+        Descripcion = upTareaVM.Descripcion;
+        Color = upTareaVM.Color;
+    }
+
     public Tarea(CrearTareaViewModel creTareaVM)
     {
-        idUsuarioAsignado = creTareaVM.IdTablero;
+        idTablero = creTareaVM.IdTablero;
         Nombre = creTareaVM.Nombre;
         Estado = creTareaVM.Estado;
         Descripcion = creTareaVM.Descripcion;
         Color = creTareaVM.Color;
-    }
-
-    public Tarea(ModificarTareaViewModel upTareaVM)
-    {
-        idTablero = upTareaVM.IdTablero;
-        Nombre = upTareaVM.Nombre;    
-        Estado = upTareaVM.Estado;
-        Descripcion = upTareaVM.Descripcion;
-        Color = upTareaVM.Color;
+        idUsuarioAsignado = creTareaVM.IdUsuarioAsignado;
     }
 
 }
