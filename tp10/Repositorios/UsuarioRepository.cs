@@ -118,6 +118,22 @@ namespace tp10.Repositorios
             return (usuario);
         }
 
+        public void Delete(int id)
+        {
+            var queryString = "DELETE FROM Usuario WHERE id = @id";
+
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(queryString, connection);
+
+                command.Parameters.Add(new SQLiteParameter("@id", id));
+
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
 
         // public void Create(Usuario usuario)
         // {
@@ -165,20 +181,6 @@ namespace tp10.Repositorios
 
         //     return null;
         // }
-
-        // public void Remove(int id)
-        // {
-        //     var queryString = "DELETE FROM Usuario WHERE id = @idUser";
-        //     using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
-        //     {
-        //         connection.Open();
-        //         SQLiteCommand command = new SQLiteCommand(queryString, connection);
-        //         command.Parameters.Add(new SQLiteParameter("@idUser", id));
-        //         command.ExecuteNonQuery();
-        //         connection.Close();
-        //     }
-        // }
-
 
     }
 }

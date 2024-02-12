@@ -8,6 +8,7 @@ namespace tp10.Repositorios
         public List<Usuario> GetAll();
         public void Update(int id, Usuario usuario);
         public Usuario Get(int id);
+        public void Delete(int id);
         // public void Create(Usuario usuario);
         // public void Update(int id, Usuario usuario);
         // public Usuario Get(int id);

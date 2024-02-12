@@ -81,6 +81,24 @@ public class UsuarioController : Controller
         }
     }
 
+    public IActionResult DeleteUsuario(int id)
+    {
+        try
+        {
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+            if (!ModelState.IsValid) return RedirectToAction("Index", id);
+
+            var idreserva = _usuarioRepository.Get(id).Id;
+            _usuarioRepository.Delete(id);
+            return RedirectToAction("Index", new { id = idreserva });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+
 
     // --------- Controles -----------
 
