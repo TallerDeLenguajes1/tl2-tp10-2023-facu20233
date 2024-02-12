@@ -109,6 +109,41 @@ public class TableroController : Controller
         }
     }
 
+    [HttpGet]
+    public IActionResult CrearTablero()
+    {
+        try
+        {
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+
+            var viewModel = new CrearTableroViewModel();
+            return View(viewModel);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+
+    [HttpPost]
+    public IActionResult CrearTablero(CrearTableroViewModel tablero)
+    {
+        try
+        {
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+            if (!ModelState.IsValid) return RedirectToAction("Index");
+
+            _tableroRepository.Create(new Tablero(tablero));
+            return RedirectToAction("Index");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+
     // [HttpGet]
     // // Acción para mostrar la página de creación de tableros
     // public IActionResult Crear()

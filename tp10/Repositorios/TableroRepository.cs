@@ -104,24 +104,24 @@ namespace tp10.Repositorios
             return (tablero);
         }
 
-        // public void Create(Tablero tablero)
-        // {
-        //     var query = $"INSERT INTO Tablero (id_usuario_propietario, nombre, descripcion) VALUES (@idUser, @nombre, @descripcion)";
-        //     using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
-        //     {
+        public void Create(Tablero tablero)
+        {
+            var query = $"INSERT INTO Tablero (id_usuario_propietario, nombre, descripcion) VALUES (@id_usuario_propietario, @nombre, @descripcion)";
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
 
-        //         connection.Open();
-        //         var command = new SQLiteCommand(query, connection);
+                connection.Open();
+                var command = new SQLiteCommand(query, connection);
 
-        //         command.Parameters.Add(new SQLiteParameter("@idUser", tablero.IdUsuarioPropietario));
-        //         command.Parameters.Add(new SQLiteParameter("@nombre", tablero.Nombre));
-        //         command.Parameters.Add(new SQLiteParameter("@descripcion", tablero.Descripcion));
+                command.Parameters.Add(new SQLiteParameter("@id_usuario_propietario", tablero.IdUsuarioPropietario));
+                command.Parameters.Add(new SQLiteParameter("@nombre", tablero.Nombre));
+                command.Parameters.Add(new SQLiteParameter("@descripcion", tablero.Descripcion));
 
-        //         command.ExecuteNonQuery();
+                command.ExecuteNonQuery();
 
-        //         connection.Close();
-        //     }
-        // }
+                connection.Close();
+            }
+        }
 
         // public List<Tarea> ObtenerTareasAsociadasAlTablero(int idTablero)
         // {

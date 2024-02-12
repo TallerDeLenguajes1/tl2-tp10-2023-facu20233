@@ -29,6 +29,5 @@ public class CrearTareaViewModel
     public List<Tablero>? Tableros { get; set; } //*
     public Tarea? Tarea { get; set; }
 
-
-
+    
 }
