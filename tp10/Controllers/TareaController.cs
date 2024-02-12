@@ -30,9 +30,9 @@ public class TareaController : Controller
         try
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
-
+            ViewBag.AdminMessage = "¡Logueado como administrador!";
+            
             var tareas = _tareaRepository.GetAll();
-
             return View(new ListarTareasViewModel(tareas));
         }
         catch (Exception ex)

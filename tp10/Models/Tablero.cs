@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using tp10.ViewModels;
 namespace tp10.Models;
 
+
 public class Tablero{
     private int id;
     private int idUsuarioPropietario;
@@ -15,9 +16,11 @@ public class Tablero{
     public string? Nombre { get => nombre; set => nombre = value; }
     public string? Descripcion { get => descripcion; set => descripcion = value; }
 
+
     public Tablero()
     {
     }
+
 
     public Tablero(CrearTableroViewModel CreTableroVM)
     {

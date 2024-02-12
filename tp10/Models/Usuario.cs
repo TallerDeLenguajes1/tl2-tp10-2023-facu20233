@@ -8,13 +8,13 @@ public enum Rol
 }
 public class Usuario{
     private int id;
-    private string nombreDeUsuario;
-    private string contrasenia;
+    private string? nombreDeUsuario;
+    private string? contrasenia;
     private Rol rol;
 
     public int Id { get => id; set => id = value; }
-    public string NombreDeUsuario { get => nombreDeUsuario; set => nombreDeUsuario = value; }
-    public string Contrasenia { get => contrasenia; set => contrasenia = value; }
+    public string? NombreDeUsuario { get => nombreDeUsuario; set => nombreDeUsuario = value; }
+    public string? Contrasenia { get => contrasenia; set => contrasenia = value; }
     public Rol Rol { get => rol; set => rol = value; }
 
     public Usuario()

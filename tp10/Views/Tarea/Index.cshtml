@@ -1,5 +1,10 @@
 @model tp10.ViewModels.ListarTareasViewModel
 
+@if (ViewBag.AdminMessage != null)
+{
+    <p>@ViewBag.AdminMessage</p>
+}
+
 <h2>Listado de Tareas</h2>
 
 <table class="table">

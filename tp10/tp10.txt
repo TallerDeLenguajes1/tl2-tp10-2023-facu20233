@@ -1,3 +1,13 @@
+usuario
+    listar
+    modificar
+    dele
+    crar
+
+try cach
+crear tablero: listado usuario
+crear tarea: listdo tableros
+
 tareas
     modificar /
     elimanar /
