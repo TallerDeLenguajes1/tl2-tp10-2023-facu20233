@@ -123,42 +123,42 @@ namespace tp10.Repositorios
             }
         }
 
-        // public List<Tarea> ObtenerTareasAsociadasAlTablero(int idTablero)
-        // {
-        //     var queryString = "SELECT * FROM Tarea WHERE id_tablero = @idTablero";
+        public List<Tarea> ObtenerTareasAsociadasAlTablero(int idTablero)
+        {
+            var queryString = "SELECT * FROM Tarea WHERE id_tablero = @id_tablero";
 
-        //     List<Tarea> tareas = new List<Tarea>();
+            List<Tarea> tareas = new List<Tarea>();
 
-        //     using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
-        //     {
-        //         connection.Open();
-        //         SQLiteCommand command = new SQLiteCommand(queryString, connection);
-        //         command.Parameters.Add(new SQLiteParameter("@idTablero", idTablero));
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(queryString, connection);
+                command.Parameters.Add(new SQLiteParameter("@id_tablero", idTablero));
 
-        //         using (SQLiteDataReader reader = command.ExecuteReader())
-        //         {
-        //             while (reader.Read())
-        //             {
-        //                 var tarea = new Tarea
-        //                 {
-        //                     Id = Convert.ToInt32(reader["id"]),
-        //                     IdTablero = Convert.ToInt32(reader["id_tablero"]),
-        //                     Nombre = reader["nombre"].ToString(),
-        //                     Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]),
-        //                     Descripcion = reader["descripcion"].ToString(),
-        //                     Color = reader["color"].ToString(),
-        //                     IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"])
-        //                 };
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var tarea = new Tarea
+                        {
+                            Id = Convert.ToInt32(reader["id"]),
+                            IdTablero = Convert.ToInt32(reader["id_tablero"]),
+                            Nombre = reader["nombre"].ToString(),
+                            Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]),
+                            Descripcion = reader["descripcion"].ToString(),
+                            Color = reader["color"].ToString(),
+                            IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"])
+                        };
 
-        //                 tareas.Add(tarea);
-        //             }
-        //         }
+                        tareas.Add(tarea);
+                    }
+                }
 
-        //         connection.Close();
-        //     }
+                connection.Close();
+            }
 
-        //     return tareas;
-        // }
+            return tareas;
+        }
 
 
 

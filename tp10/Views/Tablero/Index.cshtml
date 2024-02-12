@@ -14,7 +14,7 @@
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Id Usuario</th>
-            <th>Tareas asociadas al tablero</th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
@@ -28,7 +28,7 @@
                 <td>@tablero.Descripcion</td>
                 <td>@tablero.IdUsuarioPropietario</td>
 
-                <td><a asp-controller="Tarea" asp-action="TareasAsociadas" asp-route-id="@tablero.Id" class="btn btn-outline-info">Ver</a></td>
+                <td><a asp-controller="Tablero" asp-action="TareasAsociadas" asp-route-id="@tablero.Id" class="btn btn-outline-info">Tareas asociadas</a></td>
                 
                 <td><a asp-controller="Tablero" asp-action="UpdateTablero" asp-route-id="@tablero.Id" class="btn btn-outline-primary">Modificar</a></td>
 
@@ -38,4 +38,4 @@
     </tbody>
 </table>
 
-<a asp-controller="Tablero" asp-action="CrearTablero" class="btn btn-outline-dark margin" role="button">+ Nuevo Tablero</a>
+<a asp-controller="Tablero" asp-action="CrearTablero" class="btn btn-outline-dark margin" role="button">Nuevo Tablero</a>

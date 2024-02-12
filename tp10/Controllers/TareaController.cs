@@ -13,14 +13,14 @@ public class TareaController : Controller
 
     private readonly ITareaRepository _tareaRepository;
     private readonly ITableroRepository _tableroRepository;
-    // private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IUsuarioRepository _usuarioRepository;
 
 
-    public TareaController(ILogger<TareaController> logger, ITareaRepository tareaRepository, ITableroRepository tableroRepository)
+    public TareaController(ILogger<TareaController> logger, ITareaRepository tareaRepository, ITableroRepository tableroRepository, IUsuarioRepository usuarioRepository)
     {
         _logger = logger;
         _tableroRepository = tableroRepository;
-        // _usuarioRepository = usuarioRepository;
+        _usuarioRepository = usuarioRepository;
         _tareaRepository = tareaRepository;
     }
 
@@ -81,14 +81,16 @@ public class TareaController : Controller
 
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
 
-            // var tareas = _tareaRepository.GetAllMesas();
+            var tableros = _tableroRepository.GetAll();
+            var usuarios = _usuarioRepository.GetAll();
 
-            // var viewModel = new CrearReservaViewModel
-            // {
-            //     MesasDisponibles = tareas
-            // };
+            var viewModel = new CrearTareaViewModel
+            {
+                ListaTableros = tableros,
+                ListaUsuarios = usuarios
+            };
 
-            var viewModel = new CrearTareaViewModel();
+            // var viewModel = new CrearTareaViewModel();
             return View(viewModel);
         }
 

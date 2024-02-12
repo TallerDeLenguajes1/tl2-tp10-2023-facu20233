@@ -19,7 +19,7 @@ public class CrearTableroViewModel
 
     // 
 
-    public List<Usuario>? Usuarios { get; set; }
+    public List<Usuario>? ListaUsuarios { get; set; }
     // public List<SelectListItem>? Tableros { get; set; }
 
     public CrearTableroViewModel()
@@ -27,11 +27,12 @@ public class CrearTableroViewModel
         // 
     }
 
-    public CrearTableroViewModel(Tablero tablero)
+    public CrearTableroViewModel(Tablero tablero, List<Usuario> listaUsuarios)
     {
         this.IdUsuarioPropietario = tablero.IdUsuarioPropietario;
         this.Nombre = tablero.Nombre;
         this.Descripcion = tablero.Descripcion;
+        ListaUsuarios = listaUsuarios;
     }
 
 

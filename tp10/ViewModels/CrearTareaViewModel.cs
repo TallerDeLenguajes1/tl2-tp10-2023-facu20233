@@ -9,7 +9,7 @@ public class CrearTareaViewModel
 
     [Display(Name = "Id del Tablero")]
     public int IdTablero { get; set; }
-    
+
 
     [Required(ErrorMessage = "El nombre de la tarea es obligatorio.")]
     [Display(Name = "Nombre de la Tarea")]
@@ -26,8 +26,19 @@ public class CrearTareaViewModel
     public int IdUsuarioAsignado { get; set; }
 
     // ---
-    public List<Tablero>? Tableros { get; set; } //*
-    public Tarea? Tarea { get; set; }
+    public List<Tablero>? ListaTableros { get; set; } //*
+    public List<Usuario>? ListaUsuarios { get; set; } //*
+    // public Tarea? Tarea { get; set; }
 
+    public CrearTareaViewModel()
+    {
+        // 
     
+    }
+    public CrearTareaViewModel(List<Tablero> listaTableros, List<Usuario> listaUsuarios)
+    {
+        ListaTableros = listaTableros;
+        ListaUsuarios = listaUsuarios;
+    }
+
 }

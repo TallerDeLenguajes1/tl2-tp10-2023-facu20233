@@ -13,15 +13,15 @@ public class TableroController : Controller
 
     private readonly ITableroRepository _tableroRepository;
     private readonly IUsuarioRepository _usuarioRepository;
-    // private readonly ITareaRepository _tareaRepository;
+    private readonly ITareaRepository _tareaRepository;
 
 
-    public TableroController(ILogger<TableroController> logger, ITableroRepository tableroRepository, IUsuarioRepository usuarioRepository)
+    public TableroController(ILogger<TableroController> logger, ITableroRepository tableroRepository, IUsuarioRepository usuarioRepository, ITareaRepository tareaRepository)
     {
         _logger = logger;
         _tableroRepository = tableroRepository;
         _usuarioRepository = usuarioRepository;
-        // _tareaRepository = tareaRepository;
+        _tareaRepository = tareaRepository;
     }
 
 
@@ -116,7 +116,14 @@ public class TableroController : Controller
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
 
-            var viewModel = new CrearTableroViewModel();
+            var usuarios = _usuarioRepository.GetAll();
+
+            var viewModel = new CrearTableroViewModel
+            {
+                ListaUsuarios = usuarios
+            };
+
+            // var viewModel = new CrearTableroViewModel();
             return View(viewModel);
         }
         catch (Exception ex)
@@ -144,37 +151,26 @@ public class TableroController : Controller
         }
     }
 
-    // [HttpGet]
-    // // Acción para mostrar la página de creación de tableros
-    // public IActionResult Crear()
-    // {
-    //     if (!manejoController.IsLogged(HttpContext)) return RedirectToAction("Index");
-    //     if (!manejoController.IsAdmin(HttpContext)) return RedirectToAction("Index");
+    [HttpGet]
+    public IActionResult TareasAsociadas(int id)
+    {
+        try
+        {
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
 
-    //     return View(new CrearTableroViewModel{IdUsuarioPropietario = (int)HttpContext.Session.GetInt32("id")});
-
-    // }
-
-
-    // // Acción para procesar la creación de tableros
-    // [HttpPost]
-    // public IActionResult Crear(CrearTableroViewModel tableroVM)
-    // {
-    //     if (!manejoController.IsLogged(HttpContext)) return RedirectToAction("Index");
-    //     if (!manejoController.IsAdmin(HttpContext)) return RedirectToAction("Index");
-    //     if (!ModelState.IsValid) return RedirectToAction("Index");
-
-    //     // Validar el modelo antes de intentar guardarlo
-    //     _tableroRepository.Create(new Tablero(tableroVM));
-
-    //     // Redirigir a la acción Index después de crear el tablero
-
-    //     // Si el modelo no es válido, vuelve a mostrar la vista de creación con errores
-    //     return RedirectToAction("Index"); 
-    // }
+            var tablero = _tableroRepository.Get(id).Id;
+            var tareas  = _tableroRepository.ObtenerTareasAsociadasAlTablero(tablero);
+            return View(new ListarTareasViewModel(tareas));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
 
 
-
+    // -------- controles ------------
 
     public IActionResult Error()
     {

@@ -1,12 +1,14 @@
+tareas asociadas al tablero
+
 usuario
     listar /
     modificar / 
     dele /
-    crar
+    crar /
 
 try cach
-crear tablero: listado usuario
-crear tarea: listdo tableros
+crear tablero: listado usuario /
+crear tarea: listdo tableros /
 
 tareas
     modificar /
@@ -14,12 +16,9 @@ tareas
     crear / (agregar el constructor?)
 
 ---
-login funcionando
-admin() no funciona bien
-listar tableros
 
-commits inicio correccio de la vista X
-
+login funcionando /
+listar tableros /
 
 ------- consultas ---------
 + el constructor en el viewmodel va o no?

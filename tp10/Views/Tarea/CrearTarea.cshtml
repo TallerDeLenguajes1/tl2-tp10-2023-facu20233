@@ -4,10 +4,23 @@
 @Model.IdUsuarioAsignado
 
 <form asp-action="CrearTarea" method="post">
-
-    <div class="form-group">
+    @*IdTablero sin select *@
+    @* <div class="form-group">
         <label asp-for="@Model.IdTablero"> </label>
         <input asp-for="@Model.IdTablero" class="form-control" />
+        <span asp-validation-for="@Model.IdTablero" class="text-danger"></span>
+    </div> *@
+
+    @*IdTablero sin select *@
+    <div class="form-group mb-3">
+        <label asp-for="@Model.IdTablero">Seleccionar Tablero:</label>
+        <select asp-for="@Model.IdTablero" class="form-select">
+            <option value="" selected> - - - </option>
+            @foreach (var u in @Model.ListaTableros)
+            {
+                <option value="@u.Id">@u.Nombre</option>
+            }
+        </select>
         <span asp-validation-for="@Model.IdTablero" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -32,13 +45,19 @@
         <input asp-for="@Model.Color" class="form-control" />
         <span asp-validation-for="@Model.Color" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="@Model.IdUsuarioAsignado"> </label>
-        <input asp-for="@Model.IdUsuarioAsignado" class="form-control" />
+    <div class="form-group mb-3">
+        <label asp-for="@Model.IdUsuarioAsignado">Seleccionar Usuario:</label>
+        <select asp-for="@Model.IdUsuarioAsignado" class="form-select">
+            <option value="" selected> - - - </option>
+            @foreach (var u in @Model.ListaUsuarios)
+            {
+                <option value="@u.Id">@u.NombreDeUsuario</option>
+            }
+        </select>
         <span asp-validation-for="@Model.IdUsuarioAsignado" class="text-danger"></span>
     </div>
 
     <div class="form-group">
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
 </form>

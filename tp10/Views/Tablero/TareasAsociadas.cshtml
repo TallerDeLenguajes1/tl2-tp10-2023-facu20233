@@ -1,0 +1,35 @@
+@model tp10.ViewModels.ListarTareasViewModel
+
+<h2>Listado de Tareas</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Color</th>
+            <th>Estado</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tarea in Model.ListaTareas)
+        {
+            <tr>
+                <td>@tarea.Id</td>
+                <td>@tarea.Nombre</td>
+                <td>@tarea.Descripcion</td>
+                <td>@tarea.Color</td>
+                <td>@tarea.Estado</td>
+                
+                <td><a asp-controller="Tarea" asp-action="UpdateTarea" asp-route-id="@tarea.Id" class="btn btn-outline-primary">Modificar</a></td>
+
+                <td><a asp-controller="Tarea" asp-action="DeleteTarea" asp-route-id="@tarea.Id" class="btn btn-outline-danger" onclick="return confirm('¿Estas seguro que quieres eliminar el tablero?')">Eliminar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Tarea" asp-action="CrearTarea" class="btn btn-outline-dark margin" role="button">Nueva Tarea</a>
