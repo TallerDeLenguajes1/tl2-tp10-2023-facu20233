@@ -70,7 +70,7 @@ namespace tp10.Repositorios
                 if (filas == 0) throw new Exception("Hubo un problema al modificar el tablero");
             }
         }
-        
+
         public Tarea Get(int id)
         {
             var queryString = "SELECT * FROM Tarea WHERE id = @id";
@@ -102,6 +102,21 @@ namespace tp10.Repositorios
             return (tarea);
         }
 
+        public void Delete(int id)
+        {
+            var queryString = "DELETE FROM Tarea WHERE id = @id";
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+                connection.Open();            
+                SQLiteCommand command = new SQLiteCommand(queryString, connection);
+
+                command.Parameters.Add(new SQLiteParameter("@id", id));
+
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
         // public void Create(int idTablero, Tarea tarea)
         // {
         //     var query = $"INSERT INTO Tarea (id_tablero, nombre, estado, descripcion, color, id_usuario_asignado) VALUES (@idTablero, @nombre, @estado, @descripcion, @color, @idUser)";
@@ -124,7 +139,7 @@ namespace tp10.Repositorios
         //     }
         // }
 
-        
+
 
         // --
 
@@ -293,18 +308,7 @@ namespace tp10.Repositorios
         //     return (tareas);
         // }
 
-        // public void Remove(int id)
-        // {
-        //     var queryString = "DELETE FROM Tarea WHERE id = @id";
-        //     using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
-        //     {
-        //         connection.Open();
-        //         SQLiteCommand command = new SQLiteCommand(queryString, connection);
-        //         command.Parameters.Add(new SQLiteParameter("@id", id));
-        //         command.ExecuteNonQuery();
-        //         connection.Close();
-        //     }
-        // }
+
 
         // public void AsignarAUsuario(int idUsuario, int idTarea)
         // {

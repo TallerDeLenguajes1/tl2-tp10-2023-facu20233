@@ -63,7 +63,15 @@ public class TareaController : Controller
         // return RedirectToAction("TareasAsociadas", new { idTablero = tarea.IdTablero });
     }
 
+    public IActionResult DeleteTarea(int id)
+    {
+        if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+        if (!ModelState.IsValid) return RedirectToAction("Index", id);
 
+        var id_reserva = _tareaRepository.Get(id).Id;
+        _tareaRepository.Delete(id);
+        return RedirectToAction("Index", new { id = id_reserva });
+    }
 
     // --------- Controles -----------
 
@@ -137,10 +145,5 @@ public class TareaController : Controller
 //     return RedirectToAction("TareasAsociadas", new { idTablero = TareaVM.IdTablero });
 // }
 
-    // Acción para eliminar tareas
-    // public IActionResult Eliminar(int id)
-    // {
-    //     tareaRepository.Remove(id);
-    //     return RedirectToAction("Index");
-    // }
+
 

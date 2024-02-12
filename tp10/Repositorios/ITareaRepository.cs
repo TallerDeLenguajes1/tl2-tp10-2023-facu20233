@@ -6,6 +6,8 @@ namespace tp10.Repositorios{
         public List<Tarea> GetAll();
         public void Update(int id, Tarea tarea);
         public Tarea Get(int id);
+
+        public void Delete(int id);
         
         // public void Create(int idTablero, Tarea tarea);
         // public void Update(int id, Tarea tarea);
