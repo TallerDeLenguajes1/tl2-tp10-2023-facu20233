@@ -17,6 +17,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +28,8 @@
                 <td>@tablero.Nombre</td>
                 <td>@tablero.Descripcion</td>
                 <td>@tablero.IdUsuarioPropietario</td>
+
+                <td><a asp-controller="Tarea" asp-action="CrearTarea" asp-route-id="@tablero.Id" class="btn btn-outline-primary">Agregar Tarea</a></td>
 
                 <td><a asp-controller="Tablero" asp-action="TareasAsociadas" asp-route-id="@tablero.Id" class="btn btn-outline-info">Tareas asociadas</a></td>
                 

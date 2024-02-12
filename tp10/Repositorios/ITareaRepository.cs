@@ -11,7 +11,7 @@ namespace tp10.Repositorios
 
         public void Delete(int id);
 
-        public void Create(int idTablero, Tarea tarea);
+        public void Create(Tarea tarea);
 
         // public void Create(int idTablero, Tarea tarea);
         // public void Update(int id, Tarea tarea);

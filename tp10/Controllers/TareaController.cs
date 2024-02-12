@@ -103,15 +103,14 @@ public class TareaController : Controller
 
 
     [HttpPost]
-    public IActionResult CrearTarea(CrearTareaViewModel tareaVm, int id_tablero)
+    public IActionResult CrearTarea(CrearTareaViewModel tareaVm)
     {
         try
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             if (!ModelState.IsValid) return RedirectToAction("Index");
 
-            var id_Tablero = _tableroRepository.Get(id_tablero).Id;
-            _tareaRepository.Create( id_Tablero ,new Tarea(tareaVm));
+            _tareaRepository.Create(new Tarea(tareaVm));
             return RedirectToAction("Index");
 
         }

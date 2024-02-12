@@ -1,4 +1,7 @@
-tareas asociadas al tablero
+crear tarea: id_tablero mal
+crear una tarea para el tableroX
+
+tareas asociadas al tablero /
 
 usuario
     listar /
