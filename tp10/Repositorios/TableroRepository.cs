@@ -123,6 +123,25 @@ namespace tp10.Repositorios
             }
         }
 
+        public void Agregar(int idUsuario, Tablero tablero)
+        {
+            var query = $"INSERT INTO Tablero (id_usuario_propietario, nombre, descripcion) VALUES (@id_usuario_propietario, @nombre, @descripcion)";
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+
+                connection.Open();
+                var command = new SQLiteCommand(query, connection);
+
+                command.Parameters.Add(new SQLiteParameter("@id_usuario_propietario", idUsuario));
+                command.Parameters.Add(new SQLiteParameter("@nombre", tablero.Nombre));
+                command.Parameters.Add(new SQLiteParameter("@descripcion", tablero.Descripcion));
+
+                command.ExecuteNonQuery();
+
+                connection.Close();
+            }
+        }
+
         public List<Tarea> ObtenerTareasAsociadasAlTablero(int idTablero)
         {
             var queryString = "SELECT * FROM Tarea WHERE id_tablero = @id_tablero";

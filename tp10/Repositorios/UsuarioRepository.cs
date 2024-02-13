@@ -64,6 +64,7 @@ namespace tp10.Repositorios
 
                         usuario.Id = Convert.ToInt32(reader["id"]);
                         usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
+                        usuario.Contrasenia = reader["contrasenia"].ToString();
                         usuario.Rol = (Rol)Enum.Parse(typeof(Rol), reader["rol"].ToString());
 
                         usuarios.Add(usuario);

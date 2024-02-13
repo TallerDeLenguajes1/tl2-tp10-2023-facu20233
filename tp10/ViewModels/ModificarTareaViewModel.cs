@@ -23,6 +23,10 @@ public class ModificarTareaViewModel
     [Display(Name = "Color de la Tarea")]
     public string? Color { get; set; }
 
+    [Display(Name = "usuario_asignado de la Tarea")]
+    public int Id_usuario_asignado { get; set; }
+    
+
 
     public ModificarTareaViewModel()
     {
@@ -31,10 +35,12 @@ public class ModificarTareaViewModel
     public ModificarTareaViewModel(Tarea tarea)
     {
         Id = tarea.Id;
+        IdTablero = tarea.IdTablero;
         Nombre = tarea.Nombre;
         Estado = tarea.Estado;
         Descripcion = tarea.Descripcion;
         Color = tarea.Color;
+        Id_usuario_asignado = tarea.IdUsuarioAsignado;
     }
 
 }

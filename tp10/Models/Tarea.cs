@@ -37,11 +37,12 @@ public class Tarea
 
     public Tarea(ModificarTareaViewModel upTareaVM)
     {
-        idTablero = upTareaVM.IdTablero;
+        IdTablero = upTareaVM.IdTablero;
         Nombre = upTareaVM.Nombre;
         Estado = upTareaVM.Estado;
         Descripcion = upTareaVM.Descripcion;
         Color = upTareaVM.Color;
+        IdUsuarioAsignado = upTareaVM.Id_usuario_asignado;
     }
 
     public Tarea(CrearTareaViewModel creTareaVM)

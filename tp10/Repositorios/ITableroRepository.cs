@@ -7,6 +7,7 @@ namespace tp10.Repositorios{
         public void Remove(int id);
         public Tablero Get(int id);
         public void Create(Tablero tablero);
+        public void Agregar(int idUsuario ,Tablero tablero);
         public List<Tarea> ObtenerTareasAsociadasAlTablero(int idTablero);
 
         public List<Tablero> GetByUser(int idUsuario);

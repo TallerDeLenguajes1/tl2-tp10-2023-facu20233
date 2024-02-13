@@ -6,7 +6,8 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Nombre de Usuario</th>
+            <th>Nombre</th>
+            <th>Contrasenia</th>
             <th>Rol</th>
             <th></th>
             <th></th>
@@ -19,6 +20,7 @@
             <tr>
                 <td>@usuario.Id</td>
                 <td>@usuario.NombreDeUsuario</td>
+                <td>@usuario.Contrasenia</td>
                 <td>@usuario.Rol</td>
 
                 <td><a asp-controller="Usuario" asp-action="UpdateUsuario" asp-route-id="@usuario.Id"

@@ -1,3 +1,6 @@
+modificar
+    pasar lista? 
+
 tableros del usuario
 crear tarea: id_tablero mal /
 crear una tarea para el tableroX /
@@ -10,7 +13,7 @@ usuario
     dele /
     crar /
 
-try cach
+try cach 
 crear tablero: listado usuario /
 crear tarea: listdo tableros /
 
