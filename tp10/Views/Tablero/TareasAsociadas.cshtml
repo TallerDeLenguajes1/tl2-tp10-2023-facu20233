@@ -1,11 +1,12 @@
 @model tp10.ViewModels.ListarTareasViewModel
 
-<h2>Tareas del TableroX </h2>
+<h2>Tareas asociadas al tablero</h2>
 
 <table class="table">
     <thead>
         <tr>
             <th>ID</th>
+            <th>Id_tablero</th>
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Color</th>
@@ -19,6 +20,7 @@
         {
             <tr>
                 <td>@tarea.Id</td>
+                <td>@tarea.IdTablero</td>
                 <td>@tarea.Nombre</td>
                 <td>@tarea.Descripcion</td>
                 <td>@tarea.Color</td>

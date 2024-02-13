@@ -140,6 +140,29 @@ namespace tp10.Repositorios
             }
         }
 
+        public void CreateEnTablero(int idT, Tarea tarea)
+        {
+            var query = $"INSERT INTO Tarea (id_tablero, nombre, estado, descripcion, color, id_usuario_asignado) VALUES (@id_tablero, @nombre, @estado, @descripcion, @color, @id_usuario_asignado)";
+    
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+
+                connection.Open();
+                var command = new SQLiteCommand(query, connection);
+
+                command.Parameters.Add(new SQLiteParameter("@id_tablero", idT));
+                command.Parameters.Add(new SQLiteParameter("@nombre", tarea.Nombre));
+                command.Parameters.Add(new SQLiteParameter("@estado", tarea.Estado));
+                command.Parameters.Add(new SQLiteParameter("@descripcion", tarea.Descripcion));
+                command.Parameters.Add(new SQLiteParameter("@color", tarea.Color));
+                command.Parameters.Add(new SQLiteParameter("@id_usuario_asignado", tarea.IdUsuarioAsignado));
+
+                command.ExecuteNonQuery();
+
+                connection.Close();
+            }
+        }
+
 
 
         // --

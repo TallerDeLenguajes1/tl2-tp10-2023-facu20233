@@ -31,7 +31,7 @@ public class TareaController : Controller
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             ViewBag.AdminMessage = "¡Logueado como administrador!";
-            
+
             var tareas = _tareaRepository.GetAll();
             return View(new ListarTareasViewModel(tareas));
         }
@@ -103,14 +103,62 @@ public class TareaController : Controller
 
 
     [HttpPost]
-    public IActionResult CrearTarea(CrearTareaViewModel tareaVm)
+    public IActionResult CrearTarea(CrearTareaViewModel tarea)
     {
         try
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             if (!ModelState.IsValid) return RedirectToAction("Index");
 
-            _tareaRepository.Create(new Tarea(tareaVm));
+            _tareaRepository.Create(new Tarea(tarea));
+            return RedirectToAction("Index");
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+
+    [HttpGet]
+    public IActionResult AgregarTarea(int id)
+    {
+        try
+        {
+
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+
+            var usuarios = _usuarioRepository.GetAll();
+            var id_Tablero = _tableroRepository.Get(id).Id;
+
+            var viewModel = new CrearTareaViewModel
+            {
+                IdTablero = id_Tablero,
+                ListaUsuarios = usuarios
+            };
+
+            // var viewModel = new CrearTareaViewModel();
+            return View(viewModel);
+        }
+
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+
+
+    [HttpPost]
+    public IActionResult AgregarTarea(CrearTareaViewModel tarea)
+    {
+        try
+        {
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+            if (!ModelState.IsValid) return RedirectToAction("Index");
+
+            _tareaRepository.CreateEnTablero(tarea.IdTablero, new Tarea(tarea));
             return RedirectToAction("Index");
 
         }

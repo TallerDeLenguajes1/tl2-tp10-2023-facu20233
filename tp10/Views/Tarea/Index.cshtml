@@ -16,6 +16,7 @@
             <th>Descripción</th>
             <th>Color</th>
             <th>Estado</th>
+            <th>id_usuario_asignado</th>
             <th></th>
             <th></th>
         </tr>
@@ -30,6 +31,7 @@
                 <td>@tarea.Descripcion</td>
                 <td>@tarea.Color</td>
                 <td>@tarea.Estado</td>
+                <td>@tarea.IdUsuarioAsignado</td>
                 
                 <td><a asp-controller="Tarea" asp-action="UpdateTarea" asp-route-id="@tarea.Id" class="btn btn-outline-primary">Modificar</a></td>
 

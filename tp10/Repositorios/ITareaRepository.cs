@@ -13,6 +13,8 @@ namespace tp10.Repositorios
 
         public void Create(Tarea tarea);
 
+        public void CreateEnTablero(int idT, Tarea tarea);
+
         // public void Create(int idTablero, Tarea tarea);
         // public void Update(int id, Tarea tarea);
         // public Tarea Get(int id);

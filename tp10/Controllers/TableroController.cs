@@ -167,7 +167,11 @@ public class TableroController : Controller
             _logger.LogError(ex.ToString());
             return RedirectToAction("Error");
         }
+
+        
     }
+
+    
 
 
     // -------- controles ------------
