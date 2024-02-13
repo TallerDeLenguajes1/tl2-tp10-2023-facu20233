@@ -9,7 +9,6 @@ namespace tp10.Repositorios{
         public void Create(Tablero tablero);
         public List<Tarea> ObtenerTareasAsociadasAlTablero(int idTablero);
 
-        // public void Create(Tablero tablero);
-        // public List<Tablero> GetByUser(int idUsuario);
+        public List<Tablero> GetByUser(int idUsuario);
     }
 }

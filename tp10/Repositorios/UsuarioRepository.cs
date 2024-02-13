@@ -118,6 +118,31 @@ namespace tp10.Repositorios
             return (usuario);
         }
 
+        public Usuario GetNombre(string nombreUsuario)
+        {
+            var queryString = "SELECT * FROM Usuario WHERE nombre_de_usuario = @nombre_de_usuario";
+
+            var usuario = new Usuario();
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(queryString, connection);
+                command.Parameters.Add(new SQLiteParameter("@nombre_de_usuario", nombreUsuario)); //*
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        usuario.Id = Convert.ToInt32(reader["id"]);
+                        usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
+                        usuario.Rol = (Rol)Enum.Parse(typeof(Rol), reader["rol"].ToString());
+                    }
+                }
+                connection.Close();
+            }
+
+            return (usuario);
+        }
+
         public void Delete(int id)
         {
             var queryString = "DELETE FROM Usuario WHERE id = @id";

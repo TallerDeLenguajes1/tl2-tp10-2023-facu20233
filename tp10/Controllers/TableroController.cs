@@ -31,7 +31,9 @@ public class TableroController : Controller
         try
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
-            var user = HttpContext.Session.GetString("Usuario");
+            
+            var nombreUsuario = HttpContext.Session.GetString("Usuario");
+            var usuario = _usuarioRepository.GetNombre(nombreUsuario).Id;
 
             if (esAdmin())
             {
@@ -42,7 +44,7 @@ public class TableroController : Controller
             else
             {
                 ViewBag.AdminMessage = "¡Logueado como operador!";
-                var tableros = _tableroRepository.GetAll();
+                var tableros = _tableroRepository.GetByUser(usuario);
                 return View(new ListarTablerosViewModel(tableros));
                 // var usuario = _usuarioRepository.GetAll().FirstOrDefault(u => u.NombreDeUsuario == HttpContext.Session.GetString("Usuario") && u.Contrasenia == HttpContext.Session.GetString("Contrasenia"));
                 // var tablero = _tableroRepository.GetByUser(usuario.Id);

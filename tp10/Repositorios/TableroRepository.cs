@@ -160,36 +160,35 @@ namespace tp10.Repositorios
             return tareas;
         }
 
+        public List<Tablero> GetByUser(int idUsuario)
+        {
+            var queryString = @"SELECT * FROM Tablero WHERE id_usuario_propietario = @id_usuario_propietario;";
 
+            List<Tablero> tableros = new List<Tablero>();
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(queryString, connection);
+                command.Parameters.Add(new SQLiteParameter("@id_usuario_propietario", idUsuario)); //*
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var tablero = new Tablero();
 
+                        tablero.Id = Convert.ToInt32(reader["id"]);
+                        tablero.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
+                        tablero.Nombre = reader["nombre"].ToString();
+                        tablero.Descripcion = reader["descripcion"].ToString();
 
-        // public List<Tablero> GetByUser(int idUsuario)
-        // {
-        //     var queryString = "SELECT * FROM Tablero WHERE id_usuario_propietario = @idUser";
+                        tableros.Add(tablero);
+                    }
+                }
+                connection.Close();
+            }
+            return tableros;
+        }
 
-        //     var tableros = new List<Tablero>();
-        //     using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
-        //     {
-        //         connection.Open();
-        //         SQLiteCommand command = new SQLiteCommand(queryString, connection);
-        //         command.Parameters.Add(new SQLiteParameter("@idUser", idUsuario));
-        //         using (SQLiteDataReader reader = command.ExecuteReader())
-        //         {
-        //             while (reader.Read())
-        //             {
-        //                 var tablero = new Tablero();
-        //                 tablero.Id = Convert.ToInt32(reader["id"]);
-        //                 tablero.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
-        //                 tablero.Nombre = reader["nombre"].ToString();
-        //                 tablero.Descripcion = reader["descripcion"].ToString();
-        //                 tableros.Add(tablero);
-        //             }
-        //         }
-        //         connection.Close();
-        //     }
-
-        //     return (tableros);
-        // }
 
     }
 }
