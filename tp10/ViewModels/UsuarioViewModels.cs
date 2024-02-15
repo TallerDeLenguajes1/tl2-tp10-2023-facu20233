@@ -1,35 +1,35 @@
-// UsuarioViewModels.cs
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using tp10.Models;
-namespace tp10.ViewModels;
+// // UsuarioViewModels.cs
+// using System.Collections.Generic;
+// using System.ComponentModel.DataAnnotations;
+// using tp10.Models;
+// namespace tp10.ViewModels;
 
-public class UsuarioViewModel
-{
-    public int Id { get; set; }
+// public class UsuarioViewModel
+// {
+//     public int Id { get; set; }
 
-    [Display(Name = "Nombre de Usuario")]
-    [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
-    public string? NombreDeUsuario { get; set; }
+//     [Display(Name = "Nombre de Usuario")]
+//     [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
+//     public string? NombreDeUsuario { get; set; }
 
-    [Display(Name = "Contraseña")]
-    [Required(ErrorMessage = "La contraseña es obligatoria.")]
-    [DataType(DataType.Password)]
-    public string? Contrasenia { get; set; }
+//     [Display(Name = "Contraseña")]
+//     [Required(ErrorMessage = "La contraseña es obligatoria.")]
+//     [DataType(DataType.Password)]
+//     public string? Contrasenia { get; set; }
 
-    [Display(Name = "Rol")]
-    [Required(ErrorMessage = "El rol es obligatorio.")]
-    public Rol Rol { get; set; }
-    // public List<Usuario> ListaUsuarios { get; set; }
+//     [Display(Name = "Rol")]
+//     [Required(ErrorMessage = "El rol es obligatorio.")]
+//     public Rol Rol { get; set; }
+//     // public List<Usuario> ListaUsuarios { get; set; }
 
     
 
-    public UsuarioViewModel(){
-        // 
+//     public UsuarioViewModel(){
+//         // 
 
-    }
-    // public UsuarioViewModel(List<Usuario> listaUsuarios){
-    //     ListaUsuarios = listaUsuarios;
-    // }
+//     }
+//     // public UsuarioViewModel(List<Usuario> listaUsuarios){
+//     //     ListaUsuarios = listaUsuarios;
+//     // }
     
-}
+// }

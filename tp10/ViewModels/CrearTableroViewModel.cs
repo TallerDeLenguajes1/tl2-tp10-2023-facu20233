@@ -6,11 +6,11 @@ namespace tp10.ViewModels;
 
 public class CrearTableroViewModel
 {
-    [Required(ErrorMessage = "seleccionar un usuario.")]
+    [Required(ErrorMessage = "Campo requerido")]
     [Display(Name = "usuario propietario")]
     public int IdUsuarioPropietario { get; set; }
 
-    [Required(ErrorMessage = "El nombre del tablero es obligatorio.")]
+    [Required(ErrorMessage = "Campo requerido")]
     [Display(Name = "Nombre del Tablero")]
     public string? Nombre { get; set; }
 

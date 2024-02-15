@@ -7,17 +7,21 @@ public class CrearTareaViewModel
 {
     public int Id { get; set; }
 
-    [Display(Name = "Id del Tablero")]
+    [Required(ErrorMessage = "Campo obligatorio")]
+    [Display(Name = "Nombre del Tablero")]
     public int IdTablero { get; set; }
 
 
-    [Required(ErrorMessage = "El nombre de la tarea es obligatorio.")]
+    [Required(ErrorMessage = "Campo obligatorio")]
+    [StringLength(30)]
     [Display(Name = "Nombre de la Tarea")]
     public string? Nombre { get; set; }
 
+    [Required(ErrorMessage = "Campo obligatorio")]
     [Display(Name = "Estado de la Tarea")]
     public EstadoTarea Estado { get; set; }
 
+    [StringLength(50)]
     [Display(Name = "Descripción de la Tarea")]
     public string? Descripcion { get; set; }
 

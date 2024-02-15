@@ -8,12 +8,14 @@ public class ModificarUsuarioViewModel
     public int Id { get; set; }
 
     [Display(Name = "Nombre de Usuario")]
+    [StringLength(30)]
     [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
     public string? NombreDeUsuario { get; set; }
 
-    [Display(Name = "Contraseña")]
     [Required(ErrorMessage = "La contraseña es obligatoria.")]
     [DataType(DataType.Password)]
+    [StringLength(30)]
+    [Display(Name = "Contraseña")]
     public string? Contrasenia { get; set; }
 
     [Display(Name = "Rol")]

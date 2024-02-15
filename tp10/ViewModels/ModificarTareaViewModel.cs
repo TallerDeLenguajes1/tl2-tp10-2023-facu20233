@@ -11,15 +11,18 @@ public class ModificarTareaViewModel
     public int IdTablero { get; set; }
 
     [Required(ErrorMessage = "El nombre de la tarea es obligatorio.")]
+    [StringLength(30)]
     [Display(Name = "Nombre de la Tarea")]
     public string? Nombre { get; set; }
 
+    [StringLength(50)]
     [Display(Name = "Descripción de la Tarea")]
     public string? Descripcion { get; set; }
 
     [Display(Name = "Estado de la Tarea")]
     public EstadoTarea Estado { get; set; }
     
+    [StringLength(20)]
     [Display(Name = "Color de la Tarea")]
     public string? Color { get; set; }
 
