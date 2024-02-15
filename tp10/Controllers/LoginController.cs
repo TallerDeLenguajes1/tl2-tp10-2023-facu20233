@@ -24,10 +24,12 @@ public class LoginController : Controller
     }
 
 
-    public IActionResult Login(LoginViewModel  usuario)
+    public IActionResult Login(LoginViewModel usuario)
     {
         try
         {
+            if (!ModelState.IsValid) return RedirectToAction("Index"); //*
+
             //existe el usuario?
             var usuarioLogeado = _usuarioRepository.AutenticarUsuario(usuario.nombreDeUsuario, usuario.contrasenia);
 
@@ -42,15 +44,17 @@ public class LoginController : Controller
             }
 
             logearUsuario(usuarioLogeado);
+            _logger.LogInformation("El usuario {0} ingreso correctamente", usuario.nombreDeUsuario); //*
 
+            return RedirectToRoute(new { controller = "Home", action = "Index" });
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error al intentar logear un usuario {ex.ToString()}");
-
+            _logger.LogError(ex.ToString());
+            _logger.LogWarning("Intento de acceso invalido - Usuario: {0} Clave ingresada: {1}", usuario.nombreDeUsuario, usuario.contrasenia);
+            return RedirectToAction("Index");
         }
 
-        return RedirectToRoute(new { controller = "Home", action = "Index" });
     }
 
     private void logearUsuario(Usuario user)

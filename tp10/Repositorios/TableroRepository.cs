@@ -40,6 +40,7 @@ namespace tp10.Repositorios
                 }
                 connection.Close();
             }
+            if (tableros == null) throw new Exception("Hubo un problema al buscar los tableros");
             return tableros;
         }
 
@@ -57,8 +58,10 @@ namespace tp10.Repositorios
                 command.Parameters.Add(new SQLiteParameter("@descripcion", tablero.Descripcion));
                 command.Parameters.Add(new SQLiteParameter("@id", id));
 
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
                 connection.Close();
+
+                if (filas == 0) throw new Exception("Hubo un problema al modificar el tablero");
             }
         }
 
@@ -73,8 +76,10 @@ namespace tp10.Repositorios
 
                 command.Parameters.Add(new SQLiteParameter("@id", id));
 
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
                 connection.Close();
+
+                if (filas == 0) throw new Exception("Hubo un problema al eliminar el tablero especificado");
             }
         }
 
@@ -100,7 +105,7 @@ namespace tp10.Repositorios
                 }
                 connection.Close();
             }
-
+            if (tablero == null) throw new Exception("No se encontro ningun tablero");
             return (tablero);
         }
 
@@ -117,9 +122,10 @@ namespace tp10.Repositorios
                 command.Parameters.Add(new SQLiteParameter("@nombre", tablero.Nombre));
                 command.Parameters.Add(new SQLiteParameter("@descripcion", tablero.Descripcion));
 
-                command.ExecuteNonQuery();
-
+                var filas = command.ExecuteNonQuery();
                 connection.Close();
+
+                if (filas == 0) throw new Exception("Hubo un problema al crear el tablero");
             }
         }
 
@@ -136,9 +142,10 @@ namespace tp10.Repositorios
                 command.Parameters.Add(new SQLiteParameter("@nombre", tablero.Nombre));
                 command.Parameters.Add(new SQLiteParameter("@descripcion", tablero.Descripcion));
 
-                command.ExecuteNonQuery();
-
+                var filas = command.ExecuteNonQuery();
                 connection.Close();
+
+                if (filas == 0) throw new Exception("Hubo un problema al crear el tablero");
             }
         }
 
@@ -176,7 +183,9 @@ namespace tp10.Repositorios
                 connection.Close();
             }
 
-            return tareas;
+            if (tareas == null)
+                throw new Exception("No se encontro ningun tablero");
+            return (tareas);
         }
 
         public List<Tablero> GetByUser(int idUsuario)
@@ -205,7 +214,9 @@ namespace tp10.Repositorios
                 }
                 connection.Close();
             }
-            return tableros;
+            if (tableros == null)
+                throw new Exception("No se encontro ningun tablero");
+            return (tableros);
         }
 
 

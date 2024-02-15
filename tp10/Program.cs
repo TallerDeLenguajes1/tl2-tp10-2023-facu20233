@@ -17,7 +17,7 @@ builder.Services.AddSession(options =>
 });
 
 
-// Register repositories ***
+//  Aquí se realiza la inyección de los repositorios
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ITableroRepository, TableroRepository>();
 builder.Services.AddScoped<ITareaRepository, TareaRepository>();

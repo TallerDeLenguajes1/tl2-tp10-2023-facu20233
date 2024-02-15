@@ -72,6 +72,7 @@ namespace tp10.Repositorios
                 }
                 connection.Close();
             }
+            if(usuarios == null) throw new Exception("Hubo un problema al buscar los tableros");
             return usuarios;
         }
 
@@ -89,8 +90,10 @@ namespace tp10.Repositorios
                 command.Parameters.Add(new SQLiteParameter("@rol", (int)usuario.Rol));
                 command.Parameters.Add(new SQLiteParameter("@id", id));
 
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
                 connection.Close();
+
+                if(filas == 0) throw new Exception("Hubo un problema al modificar el usuario");
             }
         }
 
@@ -117,6 +120,7 @@ namespace tp10.Repositorios
                 connection.Close();
             }
 
+            if(usuario == null) throw new Exception("No se encontro ningun tablero");
             return (usuario);
         }
 
@@ -142,6 +146,7 @@ namespace tp10.Repositorios
                 connection.Close();
             }
 
+            if(usuario == null) throw new Exception("No se encontro ningun tablero");
             return (usuario);
         }
 
@@ -156,8 +161,10 @@ namespace tp10.Repositorios
 
                 command.Parameters.Add(new SQLiteParameter("@id", id));
 
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
                 connection.Close();
+
+                if(filas == 0) throw new Exception("Hubo un problema al eliminar el usuario especificado");
             }
         }
 
@@ -174,9 +181,11 @@ namespace tp10.Repositorios
                 command.Parameters.Add(new SQLiteParameter("@nombre_de_usuario", usuario.NombreDeUsuario));
                 command.Parameters.Add(new SQLiteParameter("@contrasenia", usuario.Contrasenia));
                 command.Parameters.Add(new SQLiteParameter("@rol", (int)usuario.Rol));
-                command.ExecuteNonQuery();
 
-                connection.Close();
+                var filas = command.ExecuteNonQuery();
+                connection.Close();  
+
+                if(filas == 0) throw new Exception("Hubo un problema al crear el usuario");
             }
         }
 

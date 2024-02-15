@@ -43,7 +43,7 @@ namespace tp10.Repositorios
                 }
                 connection.Close();
             }
-
+            if(tareas == null) throw new Exception("Hubo un problema al buscar las tareas");
             return tareas;
         }
 
@@ -67,7 +67,7 @@ namespace tp10.Repositorios
                 var filas = command.ExecuteNonQuery();
                 connection.Close();
 
-                if (filas == 0) throw new Exception("Hubo un problema al modificar el tablero");
+                if (filas == 0) throw new Exception("Hubo un problema al modificar la tarea");
             }
         }
 
@@ -98,6 +98,7 @@ namespace tp10.Repositorios
                 }
                 connection.Close();
             }
+
             if (tarea == null) throw new Exception("No se encontro");
             return (tarea);
         }
@@ -112,8 +113,10 @@ namespace tp10.Repositorios
 
                 command.Parameters.Add(new SQLiteParameter("@id", id));
 
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
                 connection.Close();
+
+                if(filas == 0) throw new Exception("Hubo un problema al eliminar la tarea especificada");
             }
         }
 
@@ -134,9 +137,10 @@ namespace tp10.Repositorios
                 command.Parameters.Add(new SQLiteParameter("@color", tarea.Color));
                 command.Parameters.Add(new SQLiteParameter("@id_usuario_asignado", tarea.IdUsuarioAsignado));
 
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
+                connection.Close();  
 
-                connection.Close();
+                if(filas == 0) throw new Exception("Hubo un problema al crear la tarea");
             }
         }
 
@@ -157,9 +161,10 @@ namespace tp10.Repositorios
                 command.Parameters.Add(new SQLiteParameter("@color", tarea.Color));
                 command.Parameters.Add(new SQLiteParameter("@id_usuario_asignado", tarea.IdUsuarioAsignado));
 
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
+                connection.Close();  
 
-                connection.Close();
+                if(filas == 0) throw new Exception("Hubo un problema al crear la tarea");
             }
         }
     }

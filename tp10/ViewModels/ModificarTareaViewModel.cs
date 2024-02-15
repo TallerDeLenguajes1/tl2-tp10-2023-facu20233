@@ -29,8 +29,6 @@ public class ModificarTareaViewModel
     [Display(Name = "usuario_asignado de la Tarea")]
     public int Id_usuario_asignado { get; set; }
     
-
-
     public ModificarTareaViewModel()
     {
     }
