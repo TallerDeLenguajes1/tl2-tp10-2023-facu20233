@@ -1,6 +1,6 @@
 @model tp10.ViewModels.CrearUsuarioViewModel
 
-@Model.Rol
+@* @Model.Rol *@
 
 <h2>Crear Usuario</h2>
 
@@ -25,3 +25,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

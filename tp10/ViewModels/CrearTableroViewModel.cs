@@ -6,7 +6,7 @@ namespace tp10.ViewModels;
 
 public class CrearTableroViewModel
 {
-    [Required(ErrorMessage = "Debe seleccionar un tablero.")]
+    [Required(ErrorMessage = "seleccionar un usuario.")]
     [Display(Name = "usuario propietario")]
     public int IdUsuarioPropietario { get; set; }
 

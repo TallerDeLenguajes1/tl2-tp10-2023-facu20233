@@ -1,19 +1,19 @@
 @model tp10.ViewModels.CrearTareaViewModel
 <h2>Crear Tarea</h2>
 
-@Model.IdTablero
+@* @Model.IdTablero *@
 
 <form asp-action="CrearTarea" method="post">
     @*IdTablero sin select *@
-    @* <div class="form-group">
+    <div class="form-group">
         <label asp-for="@Model.IdTablero"> </label>
         <input asp-for="@Model.IdTablero" class="form-control" />
         <span asp-validation-for="@Model.IdTablero" class="text-danger"></span>
-    </div> *@
+    </div>
 
     @*IdTablero sin select *@
     <div class="form-group mb-3">
-        <label asp-for="@Model.IdTablero">Seleccionar Tablero:</label>
+        <label asp-for="@Model.IdTablero"></label>
         <select asp-for="@Model.IdTablero" class="form-select">
             <option value="" selected> - - - </option>
             @foreach (var u in @Model.ListaTableros)
@@ -46,7 +46,7 @@
         <span asp-validation-for="@Model.Color" class="text-danger"></span>
     </div>
     <div class="form-group mb-3">
-        <label asp-for="@Model.IdUsuarioAsignado">Seleccionar Usuario:</label>
+        <label asp-for="@Model.IdUsuarioAsignado"></label>
         <select asp-for="@Model.IdUsuarioAsignado" class="form-select">
             <option value="" selected> - - - </option>
             @foreach (var u in @Model.ListaUsuarios)
@@ -61,3 +61,5 @@
 
         <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

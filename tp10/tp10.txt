@@ -1,7 +1,9 @@
-modificar
-    pasar lista? 
+manejoController borrar _
 
-tableros del usuario
+modificar
+    pasar lista? (le paso el id nose si se puede) _
+
+tableros del usuario _
 crear tarea: id_tablero mal /
 crear una tarea para el tableroX /
 

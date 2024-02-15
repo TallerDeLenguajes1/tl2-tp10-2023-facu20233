@@ -23,8 +23,10 @@ public class UsuarioController : Controller
         try
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+            // if (!esAdmin()) return RedirectToRoute("Index");
 
-            var user = HttpContext.Session.GetString("Usuario");
+            var userNombre = HttpContext.Session.GetString("Usuario");
+            var user = _usuarioRepository.GetNombre(userNombre);
 
             if (esAdmin())
             {
@@ -33,7 +35,8 @@ public class UsuarioController : Controller
             }
             else
             {
-                var usuarios = _usuarioRepository.GetAll();
+                var usuarios = new List<Usuario>();
+                usuarios.Add(user);
                 return View(new ListarUsuariosViewModel(usuarios));
             }
         }
@@ -51,7 +54,8 @@ public class UsuarioController : Controller
         try
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" }); //43
-            return View(new ModificarUsuarioViewModel(_usuarioRepository.Get(id)));
+            var user = _usuarioRepository.Get(id);
+            return View(new ModificarUsuarioViewModel(user));
         }
         catch (Exception ex)
         {
@@ -104,16 +108,7 @@ public class UsuarioController : Controller
     {
         try
         {
-
-            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
-
-            // var mesas = _usuarioRepository.GetAllMesas();
-
-            // var viewModel = new CrearReservaViewModel
-            // {
-            //     MesasDisponibles = mesas
-            // };
-
+            // if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             var viewModel = new CrearUsuarioViewModel();
             return View(viewModel);
         }
@@ -130,7 +125,7 @@ public class UsuarioController : Controller
     {
         try
         {
-            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+            // if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             if (!ModelState.IsValid) return RedirectToAction("Index");
 
 

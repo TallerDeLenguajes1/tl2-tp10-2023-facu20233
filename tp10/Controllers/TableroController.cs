@@ -112,7 +112,7 @@ public class TableroController : Controller
     }
 
     [HttpGet]
-    public IActionResult CrearTablero() //*
+    public IActionResult CrearTablero() 
     {
         try
         {
@@ -220,9 +220,6 @@ public class TableroController : Controller
 
 
     }
-
-
-
 
     // -------- controles ------------
 

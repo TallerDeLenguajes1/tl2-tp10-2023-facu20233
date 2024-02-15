@@ -7,6 +7,7 @@
 <form asp-action="UpdateUsuario" method="post">
 
     <input type="hidden" asp-for="Id" />
+    
     <div class="form-group">
         <label asp-for="@Model.NombreDeUsuario"></label>
         <input asp-for="@Model.NombreDeUsuario" class="form-control" />
@@ -30,3 +31,5 @@
 
     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
 </form>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
