@@ -30,11 +30,24 @@ public class TareaController : Controller
         try
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
-            if (!esAdmin()) return RedirectToRoute(new { controller = "Login", action = "Index" });
-            ViewBag.AdminMessage = "¡Logueado como administrador!";
 
-            var tareas = _tareaRepository.GetAll();
-            return View(new ListarTareasViewModel(tareas));
+            var nombreUser = HttpContext.Session.GetString("Usuario");
+            var user = _usuarioRepository.GetNombre(nombreUser);
+
+            if (esAdmin())
+            {
+                ViewBag.AdminMessage = "¡Logueado como administrador!";
+                var tareas = _tareaRepository.GetAll();
+                return View(new ListarTareasViewModel(tareas));
+
+            }
+            else
+            {
+                ViewBag.AdminMessage = "¡Logueado como operador!";
+                var tareas = _tareaRepository.GetByUser(user.Id);
+                return View(new ListarTareasViewModel(tareas));
+            }
+
         }
         catch (Exception ex)
         {
@@ -50,7 +63,7 @@ public class TareaController : Controller
         try
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
-            if (!esAdmin()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+            // if (!esAdmin()) return RedirectToRoute(new { controller = "Login", action = "Index" });
 
             var tareaVM = new ModificarTareaViewModel(_tareaRepository.Get(id));
             return View(tareaVM);
@@ -74,7 +87,7 @@ public class TareaController : Controller
 
             _tareaRepository.Update(tarea.Id, new Tarea(tarea));
             return RedirectToAction("Index");
-            // return RedirectToAction("TareasAsociadas", new { idTablero = tarea.IdTablero });
+            // return RedirectToAction("TareasAsociadas", new { id = tarea.IdTablero });
         }
         catch (Exception ex)
         {
@@ -91,9 +104,9 @@ public class TareaController : Controller
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             if (!ModelState.IsValid) return RedirectToAction("Index", id);
 
-            var id_reserva = _tareaRepository.Get(id).Id;
+            var idTablero = _tareaRepository.Get(id).IdTablero;
             _tareaRepository.Delete(id);
-            return RedirectToAction("Index", new { id = id_reserva });
+            return RedirectToAction("TareasAsociadas", new { id = idTablero });
         }
         catch (Exception ex)
         {
@@ -143,6 +156,7 @@ public class TareaController : Controller
             _tareaRepository.Create(new Tarea(tarea));
             return RedirectToAction("Index");
 
+
         }
         catch (Exception ex)
         {
@@ -189,14 +203,40 @@ public class TareaController : Controller
             if (!ModelState.IsValid) return RedirectToAction("Index");
 
             _tareaRepository.CreateEnTablero(tarea.IdTablero, new Tarea(tarea));
-            return RedirectToAction("Index");
 
+            // return RedirectToAction("TareasAsociadas", new{id = tarea.IdTablero}); //
+            return RedirectToRoute(new { controller = "Tablero", action = "Index" });
         }
         catch (Exception ex)
         {
             _logger.LogError(ex.ToString());
             return RedirectToAction("Error");
         }
+    }
+
+    // 
+    // 
+
+    [HttpGet]
+    public IActionResult TareasAsociadas(int id)
+    {
+        try
+        {
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+
+            var tablero = _tableroRepository.Get(id).Id;
+            var tareas = _tableroRepository.ObtenerTareasAsociadasAlTablero(tablero);
+
+            
+            return View(new ListarTareasViewModel(tareas));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+
+
     }
 
     // --------- Controles -----------

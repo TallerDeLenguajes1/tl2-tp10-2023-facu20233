@@ -27,7 +27,9 @@ public class CrearTareaViewModel
 
     [Display(Name = "Color de la Tarea")]
     public string? Color { get; set; }
-    public int IdUsuarioAsignado { get; set; }
+
+    [Display(Name = "Usuario Asignado a la tarea")]
+    public int? IdUsuarioAsignado { get; set; }
 
     // ---
     public List<Tablero>? ListaTableros { get; set; } //*
@@ -37,7 +39,6 @@ public class CrearTareaViewModel
     public CrearTareaViewModel()
     {
         // 
-    
     }
     public CrearTareaViewModel(List<Tablero> listaTableros, List<Usuario> listaUsuarios)
     {

@@ -173,7 +173,9 @@ namespace tp10.Repositorios
                             Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]),
                             Descripcion = reader["descripcion"].ToString(),
                             Color = reader["color"].ToString(),
-                            IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"])
+                            IdUsuarioAsignado = reader["id_usuario_asignado"] == DBNull.Value ? null : (int?)Convert.ToInt32(reader["id_usuario_asignado"])
+
+
                         };
 
                         tareas.Add(tarea);

@@ -103,6 +103,41 @@ namespace tp10.Repositorios
             return (tarea);
         }
 
+        public List<Tarea> GetByUser(int idUsuario)
+        {
+            var queryString = "SELECT * FROM Tarea WHERE id_usuario_asignado = @id_usuario_asignado";
+
+            List<Tarea> tareas = null;
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(queryString, connection);
+                command.Parameters.Add(new SQLiteParameter("@id_usuario_asignado", idUsuario));
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    tareas = new List<Tarea>();
+                    while (reader.Read())
+                    {
+
+                        var tarea = new Tarea();
+
+                        tarea.Id = Convert.ToInt32(reader["id"]);
+                        tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
+                        tarea.Nombre = reader["nombre"].ToString();
+                        tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
+                        tarea.Descripcion = reader["descripcion"].ToString();
+                        tarea.Color = reader["color"].ToString();
+                        tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
+
+                        tareas.Add(tarea);
+                    }
+                }
+                connection.Close();
+            }
+            if (tareas == null) throw new Exception("Hubo un problema al buscar");
+            return tareas;
+        }
+
         public void Delete(int id)
         {
             var queryString = "DELETE FROM Tarea WHERE id = @id";

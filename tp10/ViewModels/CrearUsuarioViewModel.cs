@@ -18,7 +18,6 @@ public class CrearUsuarioViewModel
     public string? Contrasenia { get; set; }
 
     [Required(ErrorMessage = "Campo obligatorio.")]
-    [StringLength(30)]
     [Display(Name = "Rol")]
     public Rol Rol { get; set; }
 

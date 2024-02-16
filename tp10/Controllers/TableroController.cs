@@ -35,6 +35,8 @@ public class TableroController : Controller
             var nombreUsuario = HttpContext.Session.GetString("Usuario");
             var usuario = _usuarioRepository.GetNombre(nombreUsuario).Id;
 
+            var usuarios = _usuarioRepository.GetAll();
+
             if (esAdmin())
             {
                 ViewBag.AdminMessage = "¡Logueado como administrador!";
@@ -155,71 +157,51 @@ public class TableroController : Controller
         }
     }
 
-    // [HttpGet]
-    // public IActionResult AgregarTablero(int Id) //*
-    // {
-    //     try
-    //     {
-    //         if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
-
-    //         var usuarios = _usuarioRepository.GetAll();
-    //         var Id_Usu = _tableroRepository.Get(Id).Id;
-
-    //         var viewModel = new CrearTableroViewModel
-    //         {
-
-    //             ListaUsuarios = usuarios,
-    //             IdUsuarioPropietario = Id_Usu //*
-    //         };
-
-    //         // var viewModel = new CrearTableroViewModel();
-    //         return View(viewModel);
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         _logger.LogError(ex.ToString());
-    //         return RedirectToAction("Error");
-    //     }
-    // }
-
-    // [HttpPost]
-    // public IActionResult AgregarTablero(CrearTableroViewModel tablero)
-    // {
-    //     try
-    //     {
-    //         if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
-    //         if (!ModelState.IsValid) return RedirectToAction("Index");
-
-
-    //         _tableroRepository.Create(tablero.IdUsuarioPropietario, new Tablero(tablero)); //*
-    //         return RedirectToAction("Index");
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         _logger.LogError(ex.ToString());
-    //         return RedirectToAction("Error");
-    //     }
-    // }
-
     [HttpGet]
-    public IActionResult TareasAsociadas(int id)
+    public IActionResult AgregarTablero() 
     {
         try
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
 
-            var tablero = _tableroRepository.Get(id).Id;
-            var tareas = _tableroRepository.ObtenerTareasAsociadasAlTablero(tablero);
-            return View(new ListarTareasViewModel(tareas));
+            var nombreUsuario = HttpContext.Session.GetString("Usuario");
+            var usuario = _usuarioRepository.GetNombre(nombreUsuario);
+
+            var viewModel = new CrearTableroViewModel
+            {
+                IdUsuarioPropietario = usuario.Id
+            };
+            // var viewModel = new CrearTableroViewModel();
+
+            return View(viewModel);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex.ToString());
             return RedirectToAction("Error");
         }
-
-
     }
+
+    [HttpPost]
+    public IActionResult AgregarTablero(CrearTableroViewModel tablero)
+    {
+        try
+        {
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+            if (!ModelState.IsValid) return RedirectToAction("Index");
+
+            _tableroRepository.Agregar(tablero.IdUsuarioPropietario ,new Tablero(tablero)); //*
+            return RedirectToAction("Index");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+
+       
+
 
     // -------- controles ------------
 

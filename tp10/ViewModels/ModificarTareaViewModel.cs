@@ -27,7 +27,7 @@ public class ModificarTareaViewModel
     public string? Color { get; set; }
 
     [Display(Name = "usuario_asignado de la Tarea")]
-    public int Id_usuario_asignado { get; set; }
+    public int? Id_usuario_asignado { get; set; }
     
     public ModificarTareaViewModel()
     {

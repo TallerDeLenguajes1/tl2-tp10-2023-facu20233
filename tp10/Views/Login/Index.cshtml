@@ -1,5 +1,10 @@
 @model tp10.ViewModels.LoginViewModel
 
+@if (ViewBag.AdminMessage != null)
+{
+    <p>@ViewBag.AdminMessage</p>
+}
+
 <h2>Inicio de Sesión</h2>
 
 <form asp-controller="Login" asp-action="Login" method="post">

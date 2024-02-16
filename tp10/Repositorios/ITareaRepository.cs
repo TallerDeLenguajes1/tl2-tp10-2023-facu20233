@@ -15,6 +15,8 @@ namespace tp10.Repositorios
 
         public void CreateEnTablero(int idT, Tarea tarea);
 
+        public List<Tarea> GetByUser(int idUsuario);
+
     }
 }
 

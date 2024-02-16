@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using tp10.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace tp10.ViewModels
 {
@@ -9,7 +10,7 @@ namespace tp10.ViewModels
         public int Id { get; set; }
 
         // public List<Usuario> Usuarios { get; set; }
-
+        [HiddenInput(DisplayValue = false)]
         [Required(ErrorMessage = "Campo obligatorio")]
         public int IdUsuarioPropietario { get; set; }
 

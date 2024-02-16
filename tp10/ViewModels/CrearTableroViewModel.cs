@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc;
 using tp10.Models;
 namespace tp10.ViewModels;
 
@@ -34,6 +35,11 @@ public class CrearTableroViewModel
         this.Descripcion = tablero.Descripcion;
         ListaUsuarios = listaUsuarios;
     }
+
+    // public CrearTableroViewModel(Usuario user)
+    // {
+    //     IdUsuarioPropietario = user.Id;
+    // }
 
 
 }

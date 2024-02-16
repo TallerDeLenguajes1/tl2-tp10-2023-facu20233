@@ -36,16 +36,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Tablero/AgregarTablero.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVyb1xBZ3JlZ2FyVGFibGVyby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Tablero/CrearTablero.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVyb1xDcmVhclRhYmxlcm8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Tablero/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVyb1xJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Tablero/TareasAsociadas.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVyb1xUYXJlYXNBc29jaWFkYXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Tablero/UpdateTablero.cshtml]
@@ -62,6 +62,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Tarea/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFyZWFcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Tarea/TareasAsociadas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFyZWFcVGFyZWFzQXNvY2lhZGFzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/repo/tl2-tp10-2023-facu20233/tp10/Views/Tarea/UpdateTarea.cshtml]
