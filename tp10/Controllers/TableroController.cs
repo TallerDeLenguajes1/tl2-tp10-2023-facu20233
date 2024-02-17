@@ -39,13 +39,13 @@ public class TableroController : Controller
 
             if (esAdmin())
             {
-                ViewBag.AdminMessage = "¡Logueado como administrador!";
+                ViewBag.AdminMessage = $"¡Logueado como {nombreUsuario}!";
                 var tableros = _tableroRepository.GetAll();
                 return View(new ListarTablerosViewModel(tableros, usuarios));
             }
             else
             {
-                ViewBag.AdminMessage = "¡Logueado como operador!";
+                ViewBag.AdminMessage = $"¡Logueado como {nombreUsuario}!";
                 var tableros = _tableroRepository.GetByUser(usuario);
                 return View(new ListarTablerosViewModel(tableros, usuarios));
                 // var usuario = _usuarioRepository.GetAll().FirstOrDefault(u => u.NombreDeUsuario == HttpContext.Session.GetString("Usuario") && u.Contrasenia == HttpContext.Session.GetString("Contrasenia"));

@@ -33,14 +33,11 @@ public class LoginController : Controller
             //existe el usuario?
             var usuarioLogeado = _usuarioRepository.AutenticarUsuario(usuario.nombreDeUsuario, usuario.contrasenia);
 
-            // si el usuario no existe devuelvo al index
             if (usuarioLogeado == null)
             {
-                ViewBag.AdminMessage = "¡Usuario no existe!";
-
                 var loginVM = new LoginViewModel()
                 {
-                    MensajeDeError = "Usuario no existente"
+                    MensajeDeError = "¡Usuario no existe!"
                 };
                 return View("Index", loginVM);
             }
@@ -48,15 +45,32 @@ public class LoginController : Controller
             logearUsuario(usuarioLogeado);
             _logger.LogInformation("El usuario {0} ingreso correctamente", usuario.nombreDeUsuario); //*
 
-            return RedirectToRoute(new { controller = "Home", action = "Index" });
+            return RedirectToRoute(new { controller = "Tablero", action = "Index" });
         }
         catch (Exception ex)
         {
             _logger.LogError(ex.ToString());
             _logger.LogWarning("Intento de acceso invalido - Usuario: {0} Clave ingresada: {1}", usuario.nombreDeUsuario, usuario.contrasenia);
-            return RedirectToAction("Index");
-        }
 
+            var errorViewModel = new ErrorViewModel()
+            {
+                ErrorMessage = "¡Usuario no existe!"
+            };
+            return View("Error", errorViewModel);
+        }
+    }
+
+    public IActionResult Logout()
+    {
+        try
+        {
+            DesloguearUsuario();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Error al intentar cerrar sesión del usuario {ex.ToString()}");
+        }
+        return RedirectToRoute(new { controller = "Login", action = "Index" });
     }
 
     private void logearUsuario(Usuario user)
@@ -65,5 +79,10 @@ public class LoginController : Controller
         HttpContext.Session.SetString("Usuario", user.NombreDeUsuario);
         HttpContext.Session.SetString("Contrasenia", user.Contrasenia);
         HttpContext.Session.SetString("Rol", user.Rol.ToString());
+    }
+
+    private void DesloguearUsuario()
+    {
+        HttpContext.Session.Clear();
     }
 }

@@ -36,15 +36,14 @@ namespace tp10.Repositorios
                         usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
                         usuario.Contrasenia = reader["contrasenia"].ToString();
                         usuario.Rol = (Rol)Convert.ToInt32(reader["rol"]);
-
                     }
                 }
                 connection.Close();
             }
-            if (usuario == null) throw new Exception("No existe el usuario");
-
+            // if (usuario == null) throw new Exception("No existe el usuario");
             return (usuario);
         }
+
 
         public List<Usuario> GetAll()
         {
@@ -72,7 +71,7 @@ namespace tp10.Repositorios
                 }
                 connection.Close();
             }
-            if(usuarios == null) throw new Exception("Hubo un problema al buscar los tableros");
+            if (usuarios == null) throw new Exception("Hubo un problema al buscar los tableros");
             return usuarios;
         }
 
@@ -93,7 +92,7 @@ namespace tp10.Repositorios
                 var filas = command.ExecuteNonQuery();
                 connection.Close();
 
-                if(filas == 0) throw new Exception("Hubo un problema al modificar el usuario");
+                if (filas == 0) throw new Exception("Hubo un problema al modificar el usuario");
             }
         }
 
@@ -120,7 +119,7 @@ namespace tp10.Repositorios
                 connection.Close();
             }
 
-            if(usuario == null) throw new Exception("No se encontro ningun tablero");
+            if (usuario == null) throw new Exception("No se encontro ningun tablero");
             return (usuario);
         }
 
@@ -146,7 +145,7 @@ namespace tp10.Repositorios
                 connection.Close();
             }
 
-            if(usuario == null) throw new Exception("No se encontro ningun tablero");
+            if (usuario == null) throw new Exception("No se encontro ningun tablero");
             return (usuario);
         }
 
@@ -164,7 +163,7 @@ namespace tp10.Repositorios
                 var filas = command.ExecuteNonQuery();
                 connection.Close();
 
-                if(filas == 0) throw new Exception("Hubo un problema al eliminar el usuario especificado");
+                if (filas == 0) throw new Exception("Hubo un problema al eliminar el usuario especificado");
             }
         }
 
@@ -183,9 +182,9 @@ namespace tp10.Repositorios
                 command.Parameters.Add(new SQLiteParameter("@rol", (int)usuario.Rol));
 
                 var filas = command.ExecuteNonQuery();
-                connection.Close();  
+                connection.Close();
 
-                if(filas == 0) throw new Exception("Hubo un problema al crear el usuario");
+                if (filas == 0) throw new Exception("Hubo un problema al crear el usuario");
             }
         }
 

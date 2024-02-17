@@ -1,13 +1,14 @@
 @model tp10.ViewModels.LoginViewModel
 
-@if (ViewBag.AdminMessage != null)
-{
-    <p>@ViewBag.AdminMessage</p>
-}
+
 
 <section class="section_forms">
     <form asp-controller="Login" asp-action="Login" method="post">
         <h2>Inicio de Sesión</h2>
+        @if (Model.MensajeDeError != null)
+        {
+            <p>@Model.MensajeDeError</p>
+        }
         <div class="form-group">
             <label asp-for="@Model.nombreDeUsuario"></label>
             <input asp-for="@Model.nombreDeUsuario" class="form-control" />
@@ -25,9 +26,9 @@
         <a asp-controller="Usuario" asp-action="CrearUsuario" class="btn btn-outline-dark margin" role="button">Crear un
             Usuario</a>
     </form>
+
 </section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
-

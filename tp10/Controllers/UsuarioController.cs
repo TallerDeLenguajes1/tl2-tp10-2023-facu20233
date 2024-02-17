@@ -33,7 +33,8 @@ public class UsuarioController : Controller
                 var usuarios = _usuarioRepository.GetAll();
                 return View(new ListarUsuariosViewModel(usuarios)
                 {
-                    EsAdmin = esAdmin()
+                    EsAdmin = esAdmin(),
+                    Logueado = logueado()
                 });
             }
             else
@@ -116,6 +117,7 @@ public class UsuarioController : Controller
             {
                 var idUsuario = _usuarioRepository.Get(id).Id;
                 _usuarioRepository.Delete(id);
+                DesloguearUsuario();
                 return RedirectToRoute(new { controller = "Login", action = "Index" });
             }
 
@@ -188,6 +190,11 @@ public class UsuarioController : Controller
 
         // return HttpContext.Session.Keys.Any() && HttpContext.Session.GetString("NivelAcceso") == Rol.Administrador.ToString();
 
+    }
+
+    private void DesloguearUsuario()
+    {
+        HttpContext.Session.Clear();
     }
 
 }

@@ -9,6 +9,7 @@ public class ListarUsuariosViewModel
     public List<Usuario> ListaUsuarios { get; set; }
 
     public bool EsAdmin { get; set; }
+    public bool Logueado { get; set; }
 
     public ListarUsuariosViewModel(List<Usuario> listaUsuarios)
     {
