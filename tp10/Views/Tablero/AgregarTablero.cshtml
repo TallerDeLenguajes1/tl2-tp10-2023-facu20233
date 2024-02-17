@@ -1,49 +1,48 @@
 @model tp10.ViewModels.CrearTableroViewModel
 
-@* @Model.IdUsuarioPropietario *@
+<section class="section_forms">
+    <form asp-action="AgregarTablero" method="post">
+        <h2>Agregar Tablero</h2>
 
-<h2>Agregar Tablero</h2>
+        <div class="form-group">
+            <input asp-for="@Model.IdUsuarioPropietario" type="hidden" />
+        </div>
 
-<form asp-action="AgregarTablero" method="post">
-
-    <div class="form-group">
-        <input asp-for="@Model.IdUsuarioPropietario" type="hidden" />
-    </div>
-
-    @*IdUsuarioPropietario sin select *@
-    @* <div class="form-group">
+        @*IdUsuarioPropietario sin select *@
+        @* <div class="form-group">
         <label asp-for="@Model.IdUsuarioPropietario"></label>
         <input asp-for="@Model.IdUsuarioPropietario" class="form-control" readonly />
         <span asp-validation-for="@Model.IdUsuarioPropietario" class="text-danger"></span>
-    </div> *@
+        </div> *@
 
-    @*IdUsuarioPropietario con select *@
-    @* <div class="form-group mb-3">
-    <label asp-for="@Model.IdUsuarioPropietario"></label>
-    <select asp-for="@Model.IdUsuarioPropietario" class="form-select">
-    <option value="" selected> - - - </option>
-    @foreach (var u in @Model.ListaUsuarios)
-    {
-    <option value="@u.Id">@u.NombreDeUsuario</option>
-    }
-    </select>
-    <span asp-validation-for="@Model.IdUsuarioPropietario" class="text-danger"></span>
-    </div> *@
+        @*IdUsuarioPropietario con select *@
+        @* <div class="form-group mb-3">
+        <label asp-for="@Model.IdUsuarioPropietario"></label>
+        <select asp-for="@Model.IdUsuarioPropietario" class="form-select">
+        <option value="" selected> - - - </option>
+        @foreach (var u in @Model.ListaUsuarios)
+        {
+        <option value="@u.Id">@u.NombreDeUsuario</option>
+        }
+        </select>
+        <span asp-validation-for="@Model.IdUsuarioPropietario" class="text-danger"></span>
+        </div> *@
 
-    <div class="form-group">
-        <label asp-for="@Model.Nombre"></label>
-        <input asp-for="@Model.Nombre" class="form-control" />
-        <span asp-validation-for="@Model.Nombre" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="@Model.Nombre"></label>
+            <input asp-for="@Model.Nombre" class="form-control" />
+            <span asp-validation-for="@Model.Nombre" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.Descripcion"></label>
-        <textarea asp-for="@Model.Descripcion" class="form-control"></textarea>
-        <span asp-validation-for="@Model.Descripcion" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="@Model.Descripcion"></label>
+            <textarea asp-for="@Model.Descripcion" class="form-control"></textarea>
+            <span asp-validation-for="@Model.Descripcion" class="text-danger"></span>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
-</form>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

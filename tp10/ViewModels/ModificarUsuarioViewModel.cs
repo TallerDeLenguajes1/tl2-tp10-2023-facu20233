@@ -21,6 +21,8 @@ public class ModificarUsuarioViewModel
     [Display(Name = "Rol")]
     [Required(ErrorMessage = "El rol es obligatorio.")]
     public Rol Rol { get; set; }
+    public bool EsAdmin { get; set; }
+    public bool Logueado { get; set; }
 
     public ModificarUsuarioViewModel(Usuario usuario)
         {

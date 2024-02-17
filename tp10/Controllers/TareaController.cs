@@ -34,18 +34,21 @@ public class TareaController : Controller
             var nombreUser = HttpContext.Session.GetString("Usuario");
             var user = _usuarioRepository.GetNombre(nombreUser);
 
+            var tableros = _tableroRepository.GetAll();
+            var usuarios = _usuarioRepository.GetAll();
+
             if (esAdmin())
             {
                 ViewBag.AdminMessage = "¡Logueado como administrador!";
                 var tareas = _tareaRepository.GetAll();
-                return View(new ListarTareasViewModel(tareas));
+                return View(new ListarTareasViewModel(tareas, tableros, usuarios));
 
             }
             else
             {
                 ViewBag.AdminMessage = "¡Logueado como operador!";
                 var tareas = _tareaRepository.GetByUser(user.Id);
-                return View(new ListarTareasViewModel(tareas));
+                return View(new ListarTareasViewModel(tareas, tableros, usuarios));
             }
 
         }
@@ -64,9 +67,12 @@ public class TareaController : Controller
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             // if (!esAdmin()) return RedirectToRoute(new { controller = "Login", action = "Index" });
+            
+            var usuarios = _usuarioRepository.GetAll();
 
-            var tareaVM = new ModificarTareaViewModel(_tareaRepository.Get(id));
+            var tareaVM = new ModificarTareaViewModel(_tareaRepository.Get(id), usuarios);
             return View(tareaVM);
+
         }
         catch (Exception ex)
         {
@@ -106,7 +112,7 @@ public class TareaController : Controller
 
             var idTablero = _tareaRepository.Get(id).IdTablero;
             _tareaRepository.Delete(id);
-            return RedirectToAction("TareasAsociadas", new { id = idTablero });
+            return RedirectToAction("Index");
         }
         catch (Exception ex)
         {
@@ -127,10 +133,14 @@ public class TareaController : Controller
             var tableros = _tableroRepository.GetAll();
             var usuarios = _usuarioRepository.GetAll();
 
+            var nombreUser = HttpContext.Session.GetString("Usuario");
+            var user = _usuarioRepository.GetNombre(nombreUser);
+
             var viewModel = new CrearTareaViewModel
             {
                 ListaTableros = tableros,
-                ListaUsuarios = usuarios
+                ListaUsuarios = usuarios,
+                IdUsuarioAsignado = user.Id
             };
 
             // var viewModel = new CrearTareaViewModel();
@@ -176,10 +186,14 @@ public class TareaController : Controller
             var usuarios = _usuarioRepository.GetAll();
             var id_Tablero = _tableroRepository.Get(id).Id;
 
+            var nombreUser = HttpContext.Session.GetString("Usuario");
+            var user = _usuarioRepository.GetNombre(nombreUser);
+
             var viewModel = new CrearTareaViewModel
             {
                 IdTablero = id_Tablero,
-                ListaUsuarios = usuarios
+                ListaUsuarios = usuarios,
+                IdUsuarioAsignado = user.Id
             };
 
             // var viewModel = new CrearTareaViewModel();
@@ -227,8 +241,10 @@ public class TareaController : Controller
             var tablero = _tableroRepository.Get(id).Id;
             var tareas = _tableroRepository.ObtenerTareasAsociadasAlTablero(tablero);
 
+            var tableros = _tableroRepository.GetAll();
+            var usuarios = _usuarioRepository.GetAll();
             
-            return View(new ListarTareasViewModel(tareas));
+            return View(new ListarTareasViewModel(tareas, tableros, usuarios));
         }
         catch (Exception ex)
         {

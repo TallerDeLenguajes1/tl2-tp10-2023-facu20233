@@ -31,13 +31,20 @@ public class UsuarioController : Controller
             if (esAdmin())
             {
                 var usuarios = _usuarioRepository.GetAll();
-                return View(new ListarUsuariosViewModel(usuarios));
+                return View(new ListarUsuariosViewModel(usuarios)
+                {
+                    EsAdmin = esAdmin()
+                });
             }
             else
             {
+                ViewBag.EsAdmin = false;
                 var usuarios = new List<Usuario>();
                 usuarios.Add(user);
-                return View(new ListarUsuariosViewModel(usuarios));
+                return View(new ListarUsuariosViewModel(usuarios)
+                {
+                    EsAdmin = esAdmin()
+                });
             }
         }
         catch (Exception ex)
@@ -55,7 +62,14 @@ public class UsuarioController : Controller
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" }); //43
             var user = _usuarioRepository.Get(id);
-            return View(new ModificarUsuarioViewModel(user));
+
+            var viewModel = new ModificarUsuarioViewModel(user)
+            {
+                Logueado = true,
+                EsAdmin = esAdmin()
+            };
+
+            return View(viewModel);
         }
         catch (Exception ex)
         {
@@ -92,9 +106,19 @@ public class UsuarioController : Controller
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             if (!ModelState.IsValid) return RedirectToAction("Index", id);
 
-            var idreserva = _usuarioRepository.Get(id).Id;
-            _usuarioRepository.Delete(id);
-            return RedirectToAction("Index", new { id = idreserva });
+            if (esAdmin())
+            {
+                var idUsuario = _usuarioRepository.Get(id).Id;
+                _usuarioRepository.Delete(id);
+                return RedirectToAction("Index", new { id = idUsuario });
+            }
+            else
+            {
+                var idUsuario = _usuarioRepository.Get(id).Id;
+                _usuarioRepository.Delete(id);
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
+
         }
         catch (Exception ex)
         {
@@ -109,7 +133,10 @@ public class UsuarioController : Controller
         try
         {
             // if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
-            var viewModel = new CrearUsuarioViewModel();
+            var viewModel = new CrearUsuarioViewModel()
+            {
+                EsAdmin = esAdmin()
+            };
             return View(viewModel);
         }
 
@@ -125,9 +152,7 @@ public class UsuarioController : Controller
     {
         try
         {
-            // if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             if (!ModelState.IsValid) return RedirectToAction("Index");
-
 
             _usuarioRepository.Create(new Usuario(usuario));
             return RedirectToAction("Index");

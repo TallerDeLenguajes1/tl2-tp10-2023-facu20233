@@ -11,7 +11,7 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>Id Usuario Propietario</th>
+            <th>Usuario Propietario</th>
             <th>Nombre</th>
             <th>Descripción</th>
             <th></th>
@@ -25,22 +25,31 @@
         {
             <tr>
                 <td>@tablero.Id</td>
-                <td>@tablero.IdUsuarioPropietario</td>
+                <td>@Model.ListaUsuarios.FirstOrDefault(u => u.Id == tablero.IdUsuarioPropietario)?.NombreDeUsuario</td>
                 <td>@tablero.Nombre</td>
                 <td>@tablero.Descripcion</td>
 
-                <td><a asp-controller="Tarea" asp-action="AgregarTarea" asp-route-id="@tablero.Id" class="btn btn-outline-primary">Agregar Tarea</a></td>
+                <td><a asp-controller="Tarea" asp-action="AgregarTarea" asp-route-id="@tablero.Id"
+                        class="btn btn-outline-primary">Agregar Tarea</a></td>
 
-                <td><a asp-controller="Tarea" asp-action="TareasAsociadas" asp-route-id="@tablero.Id" class="btn btn-outline-info">Tareas asociadas</a></td>
-                
-                <td><a asp-controller="Tablero" asp-action="UpdateTablero" asp-route-id="@tablero.Id" class="btn btn-outline-primary">Modificar</a></td>
+                <td><a asp-controller="Tarea" asp-action="TareasAsociadas" asp-route-id="@tablero.Id"
+                        class="btn btn-outline-info">Tareas asociadas</a></td>
 
-                <td><a asp-controller="Tablero" asp-action="DeleteTablero" asp-route-id="@tablero.Id" class="btn btn-outline-danger" onclick="return confirm('¿Estas seguro que quieres eliminar el tablero?')">Eliminar</a></td>
+                <td><a asp-controller="Tablero" asp-action="UpdateTablero" asp-route-id="@tablero.Id"
+                        class="btn btn-outline-primary">Modificar</a></td>
+
+                <td>
+                    <a asp-controller="Tablero" asp-action="DeleteTablero" asp-route-id="@tablero.Id"
+                        class="btn btn-outline-danger"
+                        onclick="return confirm('¿Estás seguro que deseas eliminar el tablero? Esta acción eliminará todas las tareas asociadas al tablero. Esta acción no se puede deshacer.')">Eliminar</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
-@* <a asp-controller="Tablero" asp-action="CrearTablero" class="btn btn-outline-dark margin" role="button">Nuevo Tablero</a> *@
+@* <a asp-controller="Tablero" asp-action="CrearTablero" class="btn btn-outline-dark margin" role="button">Nuevo
+Tablero</a> *@
 
-<a asp-controller="Tablero" asp-action="AgregarTablero" class="btn btn-outline-dark margin" role="button">Agregar Tablero</a>
+<a asp-controller="Tablero" asp-action="AgregarTablero" class="btn btn-outline-dark margin" role="button">Agregar
+    Tablero</a>

@@ -20,6 +20,8 @@ public class CrearUsuarioViewModel
     [Required(ErrorMessage = "Campo obligatorio.")]
     [Display(Name = "Rol")]
     public Rol Rol { get; set; }
+    public bool EsAdmin { get; set; }
+    public bool Logueado { get; set; }
 
-    
 }
+

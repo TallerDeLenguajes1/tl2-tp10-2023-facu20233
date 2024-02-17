@@ -2,34 +2,49 @@
 
 @* @Model.Rol *@
 
-<h2>Modificar Usuario</h2>
+@* <section class="section_forms">
 
-<form asp-action="UpdateUsuario" method="post">
+</section> *@
 
-    <input type="hidden" asp-for="Id" />
-    
-    <div class="form-group">
-        <label asp-for="@Model.NombreDeUsuario"></label>
-        <input asp-for="@Model.NombreDeUsuario" class="form-control" />
-        <span asp-validation-for="@Model.NombreDeUsuario" class="text-danger"></span>
-    </div>
+<section class="section_forms">
 
-    <div class="form-group">
-        <label asp-for="@Model.Contrasenia"></label>
-        <input asp-for="@Model.Contrasenia" type="password" class="form-control" />
-        <span asp-validation-for="@Model.Contrasenia" class="text-danger"></span>
-    </div>
-    
-    @* agregar modificar rol *@
-    <div class="form-group">
-        <label asp-for="@Model.Rol"></label>
-        <select asp-for="@Model.Rol" asp-items="Html.GetEnumSelectList<Rol>()" class="form-control">
-            <option value="">Seleccione un Rol</option>
-        </select>
-        <span asp-validation-for="@Model.Rol" class="text-danger"></span>
-    </div>
+    <form asp-action="UpdateUsuario" method="post">
+        <h2>Modificar Usuario</h2>
 
-    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-</form>
+        <input type="hidden" asp-for="Id" />
 
-@section Scripts { <partial name="_ValidationScriptsPartial" /> }
+        <div class="form-group">
+            <label asp-for="@Model.NombreDeUsuario"></label>
+            <input asp-for="@Model.NombreDeUsuario" class="form-control" />
+            <span asp-validation-for="@Model.NombreDeUsuario" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Contrasenia"></label>
+            <input asp-for="@Model.Contrasenia" type="password" class="form-control" />
+            <span asp-validation-for="@Model.Contrasenia" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="@Model.Rol"></label>
+            <select asp-for="@Model.Rol" class="form-select" aria-label="Default select example">
+                @if (Model.EsAdmin)
+                {
+                    <option value="2">Administrador</option>
+                    <option value="1">Operador</option>
+                }
+                else
+                {
+                    <option value="1">Operador</option>
+                }
+            </select>
+            <span asp-validation-for="@Model.Rol" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

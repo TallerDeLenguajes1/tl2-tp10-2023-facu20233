@@ -41,13 +41,13 @@ public class TableroController : Controller
             {
                 ViewBag.AdminMessage = "¡Logueado como administrador!";
                 var tableros = _tableroRepository.GetAll();
-                return View(new ListarTablerosViewModel(tableros));
+                return View(new ListarTablerosViewModel(tableros, usuarios));
             }
             else
             {
                 ViewBag.AdminMessage = "¡Logueado como operador!";
                 var tableros = _tableroRepository.GetByUser(usuario);
-                return View(new ListarTablerosViewModel(tableros));
+                return View(new ListarTablerosViewModel(tableros, usuarios));
                 // var usuario = _usuarioRepository.GetAll().FirstOrDefault(u => u.NombreDeUsuario == HttpContext.Session.GetString("Usuario") && u.Contrasenia == HttpContext.Session.GetString("Contrasenia"));
                 // var tablero = _tableroRepository.GetByUser(usuario.Id);
                 // return View(tablero);
@@ -102,9 +102,17 @@ public class TableroController : Controller
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             if (!ModelState.IsValid) return RedirectToAction("Index", id);
 
-            var idTablero = _tableroRepository.Get(id).Id;
+            // var idTablero = _tableroRepository.Get(id).Id;
+            var tareasAsociadas = _tableroRepository.ObtenerTareasAsociadasAlTablero(id);
+
+            foreach (var tarea in tareasAsociadas)
+            {
+                _tareaRepository.Delete(tarea.Id);
+            }
+
             _tableroRepository.Remove(id);
-            return RedirectToAction("Index", new { id = idTablero });
+            return RedirectToAction("Index");
+            // return RedirectToAction("Index", new { id = idTablero });
         }
         catch (Exception ex)
         {
@@ -114,7 +122,7 @@ public class TableroController : Controller
     }
 
     [HttpGet]
-    public IActionResult CrearTablero() 
+    public IActionResult CrearTablero()
     {
         try
         {
@@ -158,7 +166,7 @@ public class TableroController : Controller
     }
 
     [HttpGet]
-    public IActionResult AgregarTablero() 
+    public IActionResult AgregarTablero()
     {
         try
         {
@@ -190,7 +198,7 @@ public class TableroController : Controller
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             if (!ModelState.IsValid) return RedirectToAction("Index");
 
-            _tableroRepository.Agregar(tablero.IdUsuarioPropietario ,new Tablero(tablero)); //*
+            _tableroRepository.Agregar(tablero.IdUsuarioPropietario, new Tablero(tablero)); //*
             return RedirectToAction("Index");
         }
         catch (Exception ex)
@@ -200,7 +208,7 @@ public class TableroController : Controller
         }
     }
 
-       
+
 
 
     // -------- controles ------------

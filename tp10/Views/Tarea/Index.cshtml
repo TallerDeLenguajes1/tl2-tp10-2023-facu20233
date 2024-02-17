@@ -11,12 +11,12 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>Id_tablero</th>
+            <th>tablero</th>
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Color</th>
             <th>Estado</th>
-            <th>id_usuario_asignado</th>
+            <th>usuario_asignado</th>
             <th></th>
             <th></th>
         </tr>
@@ -26,12 +26,12 @@
         {
             <tr>
                 <td>@tarea.Id</td>
-                <td>@tarea.IdTablero</td>
+                <td>@Model.ListaTableros.FirstOrDefault(u => u.Id == tarea.IdTablero)?.Nombre</td>
                 <td>@tarea.Nombre</td>
                 <td>@tarea.Descripcion</td>
                 <td>@tarea.Color</td>
                 <td>@tarea.Estado</td>
-                <td>@tarea.IdUsuarioAsignado</td>
+                <td>@Model.ListaUsuarios.FirstOrDefault(u => u.Id == tarea.IdUsuarioAsignado)?.NombreDeUsuario</td>
                 
                 <td><a asp-controller="Tarea" asp-action="UpdateTarea" asp-route-id="@tarea.Id" class="btn btn-outline-primary">Modificar</a></td>
 
@@ -41,4 +41,4 @@
     </tbody>
 </table>
 
-@* <a asp-controller="Tarea" asp-action="CrearTarea" class="btn btn-outline-dark margin" role="button">Nueva Tarea</a> *@
+<a asp-controller="Tarea" asp-action="CrearTarea" class="btn btn-outline-dark margin" role="button">Nueva Tarea</a>

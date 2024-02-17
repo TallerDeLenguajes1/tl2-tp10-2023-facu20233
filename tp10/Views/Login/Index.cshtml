@@ -5,25 +5,29 @@
     <p>@ViewBag.AdminMessage</p>
 }
 
-<h2>Inicio de Sesión</h2>
+<section class="section_forms">
+    <form asp-controller="Login" asp-action="Login" method="post">
+        <h2>Inicio de Sesión</h2>
+        <div class="form-group">
+            <label asp-for="@Model.nombreDeUsuario"></label>
+            <input asp-for="@Model.nombreDeUsuario" class="form-control" />
+            <span asp-validation-for="@Model.nombreDeUsuario" class="text-danger"></span>
+        </div>
 
-<form asp-controller="Login" asp-action="Login" method="post">
-    <div class="form-group">
-        <label asp-for="@Model.nombreDeUsuario"></label>
-        <input asp-for="@Model.nombreDeUsuario" class="form-control" />
-        <span asp-validation-for="@Model.nombreDeUsuario" class="text-danger"></span>    
-    </div>
+        <div class="form-group">
+            <label asp-for="@Model.contrasenia"></label>
+            <input asp-for="@Model.contrasenia" class="form-control" />
+            <span asp-validation-for="@Model.contrasenia" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.contrasenia"></label>
-        <input asp-for="@Model.contrasenia" class="form-control" />
-        <span asp-validation-for="@Model.contrasenia" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
 
-    <a asp-controller="Usuario" asp-action="CrearUsuario" class="btn btn-outline-dark margin" role="button">Nuevo Usuario</a>
-    
-</form>
+        <a asp-controller="Usuario" asp-action="CrearUsuario" class="btn btn-outline-dark margin" role="button">Crear un
+            Usuario</a>
+    </form>
+</section>
 
-@section Scripts { <partial name="_ValidationScriptsPartial" /> }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 

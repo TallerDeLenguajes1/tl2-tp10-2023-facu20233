@@ -29,11 +29,13 @@ public class ModificarTareaViewModel
     [Display(Name = "usuario_asignado de la Tarea")]
     public int? Id_usuario_asignado { get; set; }
     
+    public List<Usuario>? ListaUsuarios { get; set; }
+
     public ModificarTareaViewModel()
     {
     }
 
-    public ModificarTareaViewModel(Tarea tarea)
+    public ModificarTareaViewModel(Tarea tarea, List<Usuario> listaUsuarios)
     {
         Id = tarea.Id;
         IdTablero = tarea.IdTablero;
@@ -42,6 +44,7 @@ public class ModificarTareaViewModel
         Descripcion = tarea.Descripcion;
         Color = tarea.Color;
         Id_usuario_asignado = tarea.IdUsuarioAsignado;
+        ListaUsuarios = listaUsuarios;
     }
 
 }
