@@ -37,7 +37,7 @@
         <div class="form-group">
             <label asp-for="@Model.Color"></label>
             <select asp-for="@Model.Color" class="form-control">
-                <option value="">Seleccionar color</option>
+                <option value="Verde">Seleccionar color</option>
                 <option value="Rojo">Rojo</option>
                 <option value="Azul">Azul</option>
                 <option value="Verde">Verde</option>
@@ -49,7 +49,7 @@
         <div class="form-group mb-3">
             <label asp-for="@Model.IdUsuarioAsignado"></label>
             <select asp-for="@Model.IdUsuarioAsignado" class="form-select">
-                <option value="0" selected> - - - </option>
+                <option value="" selected> - - - </option>
                 @foreach (var u in Model.ListaUsuarios)
                 {
                     <option value="@u.Id">@u.NombreDeUsuario</option>

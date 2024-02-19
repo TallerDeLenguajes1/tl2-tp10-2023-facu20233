@@ -93,7 +93,7 @@ namespace tp10.Repositorios
                         tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
                         tarea.Descripcion = reader["descripcion"].ToString();
                         tarea.Color = reader["color"].ToString();
-                        tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
+                        tarea.IdUsuarioAsignado = reader.IsDBNull(reader.GetOrdinal("id_usuario_asignado"))? (int?)null: Convert.ToInt32(reader["id_usuario_asignado"]);
                     }
                 }
                 connection.Close();

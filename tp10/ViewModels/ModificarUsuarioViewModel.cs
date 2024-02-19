@@ -26,6 +26,7 @@ public class ModificarUsuarioViewModel
 
     public ModificarUsuarioViewModel(Usuario usuario)
         {
+            Id = usuario.Id;
             NombreDeUsuario = usuario.NombreDeUsuario;
             Contrasenia = usuario.Contrasenia;
             Rol = usuario.Rol;

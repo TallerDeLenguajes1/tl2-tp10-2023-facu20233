@@ -93,7 +93,7 @@ public class TareaController : Controller
             if (!ModelState.IsValid) return RedirectToAction("Index");
 
             _tareaRepository.Update(tarea.Id, new Tarea(tarea));
-            return RedirectToAction("Index");
+            return RedirectToAction("TareasAsociadas", "Tarea", new { id = tarea.IdTablero });
             // return RedirectToAction("TareasAsociadas", new { id = tarea.IdTablero });
         }
         catch (Exception ex)
@@ -136,7 +136,7 @@ public class TareaController : Controller
             if (!ModelState.IsValid) return RedirectToAction("Index");
 
             _tareaRepository.Update(tarea.Id, new Tarea(tarea));
-            return RedirectToAction("Index");
+            return RedirectToAction("TareasAsociadasOtros", "Tarea", new { id = tarea.IdTablero });
             // return RedirectToAction("TareasAsociadas", new { id = tarea.IdTablero });
         }
         catch (Exception ex)
@@ -154,9 +154,9 @@ public class TareaController : Controller
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             if (!ModelState.IsValid) return RedirectToAction("Index", id);
 
-            var idTablero = _tareaRepository.Get(id).IdTablero;
+            var tarea = _tareaRepository.Get(id);
             _tareaRepository.Delete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("TareasAsociadas", "Tarea", new { id = tarea.IdTablero });
         }
         catch (Exception ex)
         {

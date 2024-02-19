@@ -1,6 +1,6 @@
 @model tp10.ViewModels.ModificarUsuarioViewModel
 
-@* @Model.Rol *@
+@* @Model.Id *@
 
 @* <section class="section_forms">
 
@@ -11,7 +11,8 @@
     <form asp-action="UpdateUsuario" method="post">
         <h2>Modificar Usuario</h2>
 
-        <input type="hidden" asp-for="Id" />
+        @* <input type="hidden" asp-for="Id" /> *@
+        <input asp-for="@Model.Id" class="form-control" hidden />
 
         <div class="form-group">
             <label asp-for="@Model.NombreDeUsuario"></label>

@@ -37,6 +37,7 @@ public class Usuario{
 
     public Usuario(ModificarUsuarioViewModel userUpdate)
     {
+        Id = userUpdate.Id;
         NombreDeUsuario = userUpdate.NombreDeUsuario;
         Rol = userUpdate.Rol;
         Contrasenia = userUpdate.Contrasenia;
