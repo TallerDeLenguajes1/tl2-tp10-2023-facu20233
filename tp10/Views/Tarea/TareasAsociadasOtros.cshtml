@@ -27,17 +27,21 @@
                 <td>@tarea.Color</td>
                 <td>@tarea.Estado</td>
                 <td>@Model.ListaUsuarios.FirstOrDefault(u => u.Id == tarea.IdUsuarioAsignado)?.NombreDeUsuario</td>
+                
+                @* if else if *@
+                @if(Model){
+                    <td>
+                        <a asp-controller="Tarea" asp-action="UpdateTarea" asp-route-id="@tarea.Id"
+                            class="btn btn-outline-primary">Modificar</a>
+                    </td>
 
-                <td>
-                    <a asp-controller="Tarea" asp-action="UpdateTarea" asp-route-id="@tarea.Id"
-                        class="btn btn-outline-primary">Modificar</a>
-                </td>
+                    <td>
+                        <a asp-controller="Tarea" asp-action="DeleteTarea" asp-route-id="@tarea.Id"
+                            class="btn btn-outline-danger"
+                            onclick="return confirm('¿Estas seguro que quieres eliminar el tablero?')">Eliminar</a>
+                    </td>
+                }
 
-                <td>
-                    <a asp-controller="Tarea" asp-action="DeleteTarea" asp-route-id="@tarea.Id"
-                        class="btn btn-outline-danger"
-                        onclick="return confirm('¿Estas seguro que quieres eliminar el tablero?')">Eliminar</a>
-                </td>
 
 
             </tr>

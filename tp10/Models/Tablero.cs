@@ -21,7 +21,6 @@ public class Tablero{
     {
     }
 
-
     public Tablero(CrearTableroViewModel CreTableroVM)
     {
         IdUsuarioPropietario = CreTableroVM.IdUsuarioPropietario;

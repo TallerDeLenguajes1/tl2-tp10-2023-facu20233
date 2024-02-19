@@ -5,7 +5,7 @@
     <p>@ViewBag.AdminMessage</p>
 }
 
-<h2>Listado de Tableros</h2>
+<h2>Listado de Tableros Propios</h2>
 
 <table class="table">
     <thead>
@@ -48,8 +48,63 @@
     </tbody>
 </table>
 
-@* <a asp-controller="Tablero" asp-action="CrearTablero" class="btn btn-outline-dark margin" role="button">Nuevo
-Tablero</a> *@
-
 <a asp-controller="Tablero" asp-action="AgregarTablero" class="btn btn-outline-dark margin" role="button">Agregar
     Tablero</a>
+
+<hr>
+
+<h2>Listado de Tableros con Tareas asignadas</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Usuario Propietario</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ListatablerosOtros != null)
+        {
+            @foreach (var tablero in Model.ListatablerosOtros)
+            {
+                <tr>
+                    <td>@tablero.Id</td>
+                    <td>@Model.ListaUsuarios.FirstOrDefault(u => u.Id == tablero.IdUsuarioPropietario)?.NombreDeUsuario</td>
+                    <td>@tablero.Nombre</td>
+                    <td>@tablero.Descripcion</td>
+
+                    <td>
+                        @* <a asp-controller="Tarea" asp-action="AgregarTarea" asp-route-id="@tablero.Id"
+                            class="btn btn-outline-primary">Agregar Tarea</a> *@
+                    </td>
+
+                    <td>
+                        <a asp-controller="Tarea" asp-action="TareasAsociadas" asp-route-id="@tablero.Id"
+                            class="btn btn-outline-info">Tareas asociadas</a>
+                    </td>
+
+                    <td>
+                        @* <a asp-controller="Tablero" asp-action="UpdateTablero" asp-route-id="@tablero.Id"
+                            class="btn btn-outline-primary">Modificar</a> *@
+                    </td>
+
+                    <td>
+                        @* <a asp-controller="Tablero" asp-action="DeleteTablero" asp-route-id="@tablero.Id"
+                class="btn btn-outline-danger"
+                onclick="return confirm('¿Estás seguro que deseas eliminar el tablero? Esta acción eliminará todas las
+                tareas asociadas al tablero. Esta acción no se puede deshacer.')">Eliminar</a> *@
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@* <a asp-controller="Tablero" asp-action="CrearTablero" class="btn btn-outline-dark margin" role="button">Nuevo
+Tablero</a> *@

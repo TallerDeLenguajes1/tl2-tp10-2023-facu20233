@@ -130,3 +130,12 @@ label {
 /* .table tr:nth-child(odd) {
   background-color: #f2f2f2;
 } */
+
+/* --------- */
+
+hr {
+  margin-top: 60px;
+  margin-bottom:60px;
+  border: 0;
+  border-top: 1px solid #ccc;
+}

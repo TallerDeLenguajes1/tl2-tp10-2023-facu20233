@@ -221,6 +221,37 @@ namespace tp10.Repositorios
             return (tableros);
         }
 
+        public List<Tablero> GetTableroTareasAsignadas(int IdUsuario)
+        {
+            var query = "SELECT DISTINCT tab.id, id_usuario_propietario, nombre_de_usuario, tab.nombre, tab.descripcion FROM tablero tab INNER JOIN usuario ON tab.id_usuario_propietario = usuario.id INNER JOIN tarea ON tab.id = tarea.id_tablero WHERE tarea.id_usuario_asignado = @id_usuario_asignado";
+
+            var tableros = new List<Tablero>();
+            using (SQLiteConnection conexion = new SQLiteConnection(cadenaConexion))
+            {
+                conexion.Open();
+                var command = new SQLiteCommand(query, conexion);
+                command.Parameters.Add(new SQLiteParameter("@id_usuario_asignado", IdUsuario));
+
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var tablero = new Tablero();
+
+                        tablero.Id = Convert.ToInt32(reader["id"]);
+                        tablero.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
+                        tablero.Nombre = reader["nombre"].ToString();
+                        tablero.Descripcion = reader["descripcion"].ToString();
+
+
+                        tableros.Add(tablero);
+                    }
+                }
+                conexion.Close();
+            }
+            return (tableros);
+        }
+
 
     }
 }

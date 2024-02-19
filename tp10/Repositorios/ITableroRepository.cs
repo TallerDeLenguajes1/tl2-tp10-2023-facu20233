@@ -11,5 +11,7 @@ namespace tp10.Repositorios{
         public List<Tarea> ObtenerTareasAsociadasAlTablero(int idTablero);
 
         public List<Tablero> GetByUser(int idUsuario);
+
+        public List<Tablero> GetTableroTareasAsignadas(int IdUsuario);
     }
 }

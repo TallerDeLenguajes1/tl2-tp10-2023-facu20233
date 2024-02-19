@@ -47,7 +47,8 @@ public class TableroController : Controller
             {
                 ViewBag.AdminMessage = $"¡Logueado como {nombreUsuario}!";
                 var tableros = _tableroRepository.GetByUser(usuario);
-                return View(new ListarTablerosViewModel(tableros, usuarios));
+                var tablerosOtros = _tableroRepository.GetTableroTareasAsignadas(usuario); 
+                return View(new ListarTablerosViewModel(tableros, tablerosOtros, usuarios));
                 // var usuario = _usuarioRepository.GetAll().FirstOrDefault(u => u.NombreDeUsuario == HttpContext.Session.GetString("Usuario") && u.Contrasenia == HttpContext.Session.GetString("Contrasenia"));
                 // var tablero = _tableroRepository.GetByUser(usuario.Id);
                 // return View(tablero);
