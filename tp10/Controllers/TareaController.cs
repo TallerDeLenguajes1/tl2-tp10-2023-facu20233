@@ -67,7 +67,7 @@ public class TareaController : Controller
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             // if (!esAdmin()) return RedirectToRoute(new { controller = "Login", action = "Index" });
-            
+
             var usuarios = _usuarioRepository.GetAll();
 
             var tareaVM = new ModificarTareaViewModel(_tareaRepository.Get(id), usuarios);
@@ -243,7 +243,7 @@ public class TareaController : Controller
 
             var tableros = _tableroRepository.GetAll();
             var usuarios = _usuarioRepository.GetAll();
-            
+
             return View(new ListarTareasViewModel(tareas, tableros, usuarios));
         }
         catch (Exception ex)
@@ -251,8 +251,31 @@ public class TareaController : Controller
             _logger.LogError(ex.ToString());
             return RedirectToAction("Error");
         }
+    }
 
+    [HttpGet]
+    public IActionResult TareasAsociadasOtros(int id)
+    {
+        try
+        {
+            if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
 
+            var nombreUser = HttpContext.Session.GetString("Usuario");
+            var user = _usuarioRepository.GetNombre(nombreUser);
+
+            var tablero = _tableroRepository.Get(id).Id;
+            var tareas = _tableroRepository.ObtenerTareasAsociadasAlTablero(tablero);
+
+            var tableros = _tableroRepository.GetAll();
+            var usuarios = _usuarioRepository.GetAll();
+
+            return View(new ListarTareasViewModel(tareas, tableros, usuarios, user));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
     }
 
     // --------- Controles -----------

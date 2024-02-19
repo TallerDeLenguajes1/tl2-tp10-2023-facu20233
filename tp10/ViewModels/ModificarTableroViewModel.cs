@@ -17,11 +17,11 @@ namespace tp10.ViewModels
         [Required(ErrorMessage = "Campo obligatorio")]
         [StringLength(30)]
         [Display(Name = "Nombre del Tablero")]
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
 
         [Display(Name = "Descripción del Tablero")]
         [StringLength(50)]
-        public string Descripcion { get; set; }
+        public string? Descripcion { get; set; }
 
         public ModificarTableroViewModel()
         {

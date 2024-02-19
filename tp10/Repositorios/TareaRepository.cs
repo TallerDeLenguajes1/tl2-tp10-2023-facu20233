@@ -43,7 +43,7 @@ namespace tp10.Repositorios
                 }
                 connection.Close();
             }
-            if(tareas == null) throw new Exception("Hubo un problema al buscar las tareas");
+            if (tareas == null) throw new Exception("Hubo un problema al buscar las tareas");
             return tareas;
         }
 
@@ -143,7 +143,7 @@ namespace tp10.Repositorios
             var queryString = "DELETE FROM Tarea WHERE id = @id";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
-                connection.Open();            
+                connection.Open();
                 SQLiteCommand command = new SQLiteCommand(queryString, connection);
 
                 command.Parameters.Add(new SQLiteParameter("@id", id));
@@ -151,14 +151,14 @@ namespace tp10.Repositorios
                 var filas = command.ExecuteNonQuery();
                 connection.Close();
 
-                if(filas == 0) throw new Exception("Hubo un problema al eliminar la tarea especificada");
+                if (filas == 0) throw new Exception("Hubo un problema al eliminar la tarea especificada");
             }
         }
 
         public void Create(Tarea tarea)
         {
             var query = $"INSERT INTO Tarea (id_tablero, nombre, estado, descripcion, color, id_usuario_asignado) VALUES (@id_tablero, @nombre, @estado, @descripcion, @color, @id_usuario_asignado)";
-    
+
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
 
@@ -173,16 +173,16 @@ namespace tp10.Repositorios
                 command.Parameters.Add(new SQLiteParameter("@id_usuario_asignado", tarea.IdUsuarioAsignado));
 
                 var filas = command.ExecuteNonQuery();
-                connection.Close();  
+                connection.Close();
 
-                if(filas == 0) throw new Exception("Hubo un problema al crear la tarea");
+                if (filas == 0) throw new Exception("Hubo un problema al crear la tarea");
             }
         }
 
         public void CreateEnTablero(int idT, Tarea tarea)
         {
             var query = $"INSERT INTO Tarea (id_tablero, nombre, estado, descripcion, color, id_usuario_asignado) VALUES (@id_tablero, @nombre, @estado, @descripcion, @color, @id_usuario_asignado)";
-    
+
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
 
@@ -197,11 +197,13 @@ namespace tp10.Repositorios
                 command.Parameters.Add(new SQLiteParameter("@id_usuario_asignado", tarea.IdUsuarioAsignado));
 
                 var filas = command.ExecuteNonQuery();
-                connection.Close();  
+                connection.Close();
 
-                if(filas == 0) throw new Exception("Hubo un problema al crear la tarea");
+                if (filas == 0) throw new Exception("Hubo un problema al crear la tarea");
             }
         }
+
+
     }
 
 }
