@@ -31,7 +31,7 @@
                 @if (Model.UsuarioActual != null && Model.UsuarioActual.Id == tarea.IdUsuarioAsignado)
                 {
                     <td>
-                        <a asp-controller="Tarea" asp-action="UpdateTarea" asp-route-id="@tarea.Id" class="btn btn-outline-primary">Modificar</a>
+                        <a asp-controller="Tarea" asp-action="UpdateTareaAsignada" asp-route-id="@tarea.Id" class="btn btn-outline-primary">Modificar</a>
                     </td>
                     <td>
                         <a asp-controller="Tarea" asp-action="DeleteTarea" asp-route-id="@tarea.Id" class="btn btn-outline-danger" onclick="return confirm('¿Estás seguro que quieres eliminar la tarea?')">Eliminar</a>
