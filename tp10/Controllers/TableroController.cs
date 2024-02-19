@@ -23,7 +23,8 @@ public class TableroController : Controller
         _usuarioRepository = usuarioRepository;
         _tareaRepository = tareaRepository;
     }
-
+    
+    
 
     // Acción para listar tableros
     public IActionResult Index()
@@ -36,24 +37,33 @@ public class TableroController : Controller
             var usuario = _usuarioRepository.GetNombre(nombreUsuario).Id;
 
             var usuarios = _usuarioRepository.GetAll();
+            var tablerosPropios = _tableroRepository.GetByUser(usuario);
 
             if (esAdmin())
             {
                 ViewBag.AdminMessage = $"¡Logueado como {nombreUsuario}!";
-                var tableros = _tableroRepository.GetAll();
-                return View(new ListarTablerosViewModel(tableros, usuarios));
+                var todosTableros = _tableroRepository.GetAll();
+                var tablerosOtros = _tableroRepository.GetTableroTareasAsignadas(usuario); 
+
+                var viewModel = new ListarTablerosViewModel(tablerosPropios, tablerosOtros, usuarios, todosTableros){
+                    EsAdmin = true
+                };
+                return View(viewModel);
             }
             else
             {
                 ViewBag.AdminMessage = $"¡Logueado como {nombreUsuario}!";
-                var tableros = _tableroRepository.GetByUser(usuario);
+                // var tableros = _tableroRepository.GetByUser(usuario);
                 var tablerosOtros = _tableroRepository.GetTableroTareasAsignadas(usuario); 
-                return View(new ListarTablerosViewModel(tableros, tablerosOtros, usuarios));
+
+                var viewModel = new ListarTablerosViewModel(tablerosPropios, tablerosOtros, usuarios){
+                    EsAdmin = false
+                };
+                return View(viewModel);
                 // var usuario = _usuarioRepository.GetAll().FirstOrDefault(u => u.NombreDeUsuario == HttpContext.Session.GetString("Usuario") && u.Contrasenia == HttpContext.Session.GetString("Contrasenia"));
                 // var tablero = _tableroRepository.GetByUser(usuario.Id);
                 // return View(tablero);
             }
-
         }
         catch (Exception ex)
         {

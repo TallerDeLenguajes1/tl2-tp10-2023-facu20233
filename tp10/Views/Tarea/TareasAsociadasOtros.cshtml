@@ -34,7 +34,7 @@
                         <a asp-controller="Tarea" asp-action="UpdateTareaAsignada" asp-route-id="@tarea.Id" class="btn btn-outline-primary">Modificar</a>
                     </td>
                     <td>
-                        <a asp-controller="Tarea" asp-action="DeleteTarea" asp-route-id="@tarea.Id" class="btn btn-outline-danger" onclick="return confirm('¿Estás seguro que quieres eliminar la tarea?')">Eliminar</a>
+                        @* <a asp-controller="Tarea" asp-action="DeleteTarea" asp-route-id="@tarea.Id" class="btn btn-outline-danger" onclick="return confirm('¿Estás seguro que quieres eliminar la tarea?')">Eliminar</a> *@
                     </td>
                 }
                 else
@@ -48,4 +48,4 @@
     </tbody>
 </table>
 
-<a asp-controller="Tarea" asp-action="AgregarTarea" class="btn btn-outline-dark margin" role="button">Agregar Tarea</a>
+@* <a asp-controller="Tarea" asp-action="AgregarTarea" class="btn btn-outline-dark margin" role="button">Agregar Tarea</a> *@

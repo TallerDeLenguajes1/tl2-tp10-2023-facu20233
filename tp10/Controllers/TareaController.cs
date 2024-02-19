@@ -40,7 +40,8 @@ public class TareaController : Controller
             if (esAdmin())
             {
                 ViewBag.AdminMessage = "¡Logueado como administrador!";
-                var tareas = _tareaRepository.GetAll();
+                // var tareas = _tareaRepository.GetAll();
+                var tareas = _tareaRepository.GetByUser(user.Id);
                 return View(new ListarTareasViewModel(tareas, tableros, usuarios));
 
             }
