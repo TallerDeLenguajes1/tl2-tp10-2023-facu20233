@@ -25,8 +25,8 @@ public class UsuarioController : Controller
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
             // if (!esAdmin()) return RedirectToRoute("Index");
 
-            var userNombre = HttpContext.Session.GetString("Usuario");
-            var user = _usuarioRepository.GetNombre(userNombre);
+            var userId = HttpContext.Session.GetInt32("Id") ?? 0;
+            var user = _usuarioRepository.Get(userId);
 
             if (esAdmin())
             {

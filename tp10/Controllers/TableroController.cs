@@ -79,7 +79,18 @@ public class TableroController : Controller
         try
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
-            return View(new ModificarTableroViewModel(_tableroRepository.Get(id)));
+
+            var usuarios = _usuarioRepository.GetAll();
+            var userId = HttpContext.Session.GetInt32("Id") ?? 0;
+            var user = _usuarioRepository.Get(userId);
+
+            var viewModel = new ModificarTableroViewModel(_tableroRepository.Get(id),usuarios){
+                IdUsuarioPropietario = user.Id,
+                EsAdmin = esAdmin()
+                
+            };
+
+            return View(viewModel);
         }
         catch (Exception ex)
         {

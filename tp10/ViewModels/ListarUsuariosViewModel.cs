@@ -6,7 +6,8 @@ namespace tp10.ViewModels;
 
 public class ListarUsuariosViewModel
 {
-    public List<Usuario> ListaUsuarios { get; set; }
+    public List<Usuario>? ListaUsuarios { get; set; }
+    public Usuario? Usuarios { get; set; }
 
     public bool EsAdmin { get; set; }
     public bool Logueado { get; set; }
@@ -14,5 +15,10 @@ public class ListarUsuariosViewModel
     public ListarUsuariosViewModel(List<Usuario> listaUsuarios)
     {
         ListaUsuarios = listaUsuarios;
+    }
+
+    public ListarUsuariosViewModel(Usuario usuarios)
+    {
+        Usuarios = usuarios;
     }
 }
