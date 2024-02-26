@@ -10,7 +10,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Id</th>
+            @* <th>Id</th> *@
             <th>tablero</th>
             <th>Nombre</th>
             <th>Descripción</th>
@@ -25,7 +25,7 @@
         @foreach (var tarea in Model.ListaTareas)
         {
             <tr>
-                <td>@tarea.Id</td>
+                @* <td>@tarea.Id</td> *@
                 <td>@Model.ListaTableros.FirstOrDefault(u => u.Id == tarea.IdTablero)?.Nombre</td>
                 <td>@tarea.Nombre</td>
                 <td>@tarea.Descripcion</td>

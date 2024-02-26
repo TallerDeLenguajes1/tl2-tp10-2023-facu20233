@@ -10,7 +10,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Id</th>
+            @* <th>Id</th> *@
             <th>Usuario Propietario</th>
             <th>Nombre</th>
             <th>Descripción</th>
@@ -24,7 +24,7 @@
         @foreach (var tablero in Model.Listatableros)
         {
             <tr>
-                <td>@tablero.Id</td>
+                @* <td>@tablero.Id</td> *@
                 <td>@Model.ListaUsuarios.FirstOrDefault(u => u.Id == tablero.IdUsuarioPropietario)?.NombreDeUsuario</td>
                 <td>@tablero.Nombre</td>
                 <td>@tablero.Descripcion</td>
@@ -52,7 +52,7 @@
     Tablero</a>
 
 
-@* ----------------------------- *@
+@* -------------- Tareas asignadas --------------- *@
 <hr>
 
 <h2>Listado de Tableros con Tareas asignadas</h2>
@@ -60,7 +60,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Id</th>
+            @* <th>Id</th> *@
             <th>Usuario Propietario</th>
             <th>Nombre</th>
             <th>Descripción</th>
@@ -76,7 +76,7 @@
             @foreach (var tablero in Model.ListatablerosOtros)
             {
                 <tr>
-                    <td>@tablero.Id</td>
+                    @* <td>@tablero.Id</td> *@
                     <td>@Model.ListaUsuarios.FirstOrDefault(u => u.Id == tablero.IdUsuarioPropietario)?.NombreDeUsuario</td>
                     <td>@tablero.Nombre</td>
                     <td>@tablero.Descripcion</td>
@@ -108,7 +108,7 @@
     </tbody>
 </table>
 
-@* ----------------------------- *@
+@* -------------- (Admin) --------------- *@
 <hr>
 
 @if (Model.EsAdmin)
@@ -118,7 +118,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                @* <th>Id</th> *@
                 <th>Usuario Propietario</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
@@ -135,7 +135,7 @@
                 @foreach (var tablero in Model.ListatablerosAdmin)
                 {
                     <tr>
-                        <td>@tablero.Id</td>
+                        @* <td>@tablero.Id</td> *@
                         <td>@Model.ListaUsuarios.FirstOrDefault(u => u.Id == tablero.IdUsuarioPropietario)?.NombreDeUsuario</td>
                         <td>@tablero.Nombre</td>
                         <td>@tablero.Descripcion</td>

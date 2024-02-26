@@ -44,6 +44,7 @@ public class ModificarTareaViewModel
         Descripcion = tarea.Descripcion;
         Color = tarea.Color;
         Id_usuario_asignado = tarea.IdUsuarioAsignado;
+        
         ListaUsuarios = listaUsuarios;
     }
 

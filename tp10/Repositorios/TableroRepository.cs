@@ -7,6 +7,7 @@ using tp10.Models;
 // dotnet add package System.Data.SQLite
 namespace tp10.Repositorios
 {
+
     public class TableroRepository : ITableroRepository
     {
 

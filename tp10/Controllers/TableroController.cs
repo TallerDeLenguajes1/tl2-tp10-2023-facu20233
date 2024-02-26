@@ -18,6 +18,7 @@ public class TableroController : Controller
 
     public TableroController(ILogger<TableroController> logger, ITableroRepository tableroRepository, IUsuarioRepository usuarioRepository, ITareaRepository tareaRepository)
     {
+        //  instancias de los repositorios 
         _logger = logger;
         _tableroRepository = tableroRepository;
         _usuarioRepository = usuarioRepository;
@@ -48,6 +49,8 @@ public class TableroController : Controller
                 var viewModel = new ListarTablerosViewModel(tablerosPropios, tablerosOtros, usuarios, todosTableros){
                     EsAdmin = true
                 };
+
+                //  devuelve la vista
                 return View(viewModel);
             }
             else
