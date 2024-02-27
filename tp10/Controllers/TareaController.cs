@@ -31,8 +31,10 @@ public class TareaController : Controller
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
 
-            var nombreUser = HttpContext.Session.GetString("Usuario");
-            var user = _usuarioRepository.GetNombre(nombreUser);
+            // var nombreUser = HttpContext.Session.GetString("Usuario");
+            // var user = _usuarioRepository.GetNombre(nombreUser);
+            var userId = HttpContext.Session.GetInt32("Id") ?? 0;
+            var user = _usuarioRepository.Get(userId);
 
             var tableros = _tableroRepository.GetAll();
             var usuarios = _usuarioRepository.GetAll();
@@ -177,8 +179,11 @@ public class TareaController : Controller
             var tableros = _tableroRepository.GetAll();
             var usuarios = _usuarioRepository.GetAll();
 
-            var nombreUser = HttpContext.Session.GetString("Usuario");
-            var user = _usuarioRepository.GetNombre(nombreUser);
+            // var nombreUser = HttpContext.Session.GetString("Usuario");
+            // var user = _usuarioRepository.GetNombre(nombreUser);
+
+            var userId = HttpContext.Session.GetInt32("Id") ?? 0;
+            var user = _usuarioRepository.Get(userId);
 
             var viewModel = new CrearTareaViewModel
             {
@@ -230,8 +235,11 @@ public class TareaController : Controller
             var usuarios = _usuarioRepository.GetAll();
             var id_Tablero = _tableroRepository.Get(id).Id;
 
-            var nombreUser = HttpContext.Session.GetString("Usuario");
-            var user = _usuarioRepository.GetNombre(nombreUser);
+            // var nombreUser = HttpContext.Session.GetString("Usuario");
+            // var user = _usuarioRepository.GetNombre(nombreUser);
+
+            var userId = HttpContext.Session.GetInt32("Id") ?? 0;
+            var user = _usuarioRepository.Get(userId);
 
             var viewModel = new CrearTareaViewModel
             {
@@ -304,8 +312,10 @@ public class TareaController : Controller
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
 
-            var nombreUser = HttpContext.Session.GetString("Usuario");
-            var user = _usuarioRepository.GetNombre(nombreUser);
+            // var nombreUser = HttpContext.Session.GetString("Usuario");
+            // var user = _usuarioRepository.GetNombre(nombreUser);
+            var userId = HttpContext.Session.GetInt32("Id") ?? 0;
+            var user = _usuarioRepository.Get(userId);
 
             var tablero = _tableroRepository.Get(id).Id;
             var tareas = _tableroRepository.ObtenerTareasAsociadasAlTablero(tablero);

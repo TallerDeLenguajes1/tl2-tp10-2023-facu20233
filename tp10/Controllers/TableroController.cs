@@ -34,17 +34,20 @@ public class TableroController : Controller
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
 
-            var nombreUsuario = HttpContext.Session.GetString("Usuario");
-            var usuario = _usuarioRepository.GetNombre(nombreUsuario).Id;
+            // var nombreUsuario = HttpContext.Session.GetString("Usuario");
+            // var usuario = _usuarioRepository.GetNombre(nombreUsuario).Id;
+
+            var userId = HttpContext.Session.GetInt32("Id") ?? 0;
+            var usuario = _usuarioRepository.Get(userId);
 
             var usuarios = _usuarioRepository.GetAll();
-            var tablerosPropios = _tableroRepository.GetByUser(usuario);
+            var tablerosPropios = _tableroRepository.GetByUser(usuario.Id);
 
             if (esAdmin())
             {
-                ViewBag.AdminMessage = $"¡Logueado como {nombreUsuario}!";
+                ViewBag.AdminMessage = $"¡Logueado como {usuario.NombreDeUsuario}!";
                 var todosTableros = _tableroRepository.GetAll();
-                var tablerosOtros = _tableroRepository.GetTableroTareasAsignadas(usuario); 
+                var tablerosOtros = _tableroRepository.GetTableroTareasAsignadas(usuario.Id); 
 
                 var viewModel = new ListarTablerosViewModel(tablerosPropios, tablerosOtros, usuarios, todosTableros){
                     EsAdmin = true
@@ -55,9 +58,9 @@ public class TableroController : Controller
             }
             else
             {
-                ViewBag.AdminMessage = $"¡Logueado como {nombreUsuario}!";
+                ViewBag.AdminMessage = $"¡Logueado como {usuario.NombreDeUsuario}!";
                 // var tableros = _tableroRepository.GetByUser(usuario);
-                var tablerosOtros = _tableroRepository.GetTableroTareasAsignadas(usuario); 
+                var tablerosOtros = _tableroRepository.GetTableroTareasAsignadas(usuario.Id); 
 
                 var viewModel = new ListarTablerosViewModel(tablerosPropios, tablerosOtros, usuarios){
                     EsAdmin = false
@@ -197,8 +200,11 @@ public class TableroController : Controller
         {
             if (!logueado()) return RedirectToRoute(new { controller = "Login", action = "Index" });
 
-            var nombreUsuario = HttpContext.Session.GetString("Usuario");
-            var usuario = _usuarioRepository.GetNombre(nombreUsuario);
+            // var nombreUsuario = HttpContext.Session.GetString("Usuario");
+            // var usuario = _usuarioRepository.GetNombre(nombreUsuario);
+
+            var userId = HttpContext.Session.GetInt32("Id") ?? 0;
+            var usuario = _usuarioRepository.Get(userId);
 
             var viewModel = new CrearTableroViewModel
             {
